@@ -1,0 +1,73 @@
+\documentclass[titlepage, a4paper, 10pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+% \usepackage{pgfplots}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{array}
+%\usetikzlibrary{mindmap}
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\date{Summer 2023}
+\author{Covering lessons: 3.1 -- 3.3}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Summer 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{activity}
+\setcounter{activity}{1}
+\newenvironment{newactivity}
+{
+	\noindent\textbf{Activity \theactivity}
+}
+{
+\stepcounter{activity}
+\par
+}
+% -------------------------------------------------------
+\begin{document}
+    \maketitle
+
+    \section{\centering Determinants (3.1)}
+    \begin{mideea}{0.9}
+        \[\forall A \in \mathbb{R}^{n \times n}, \ \det A = \sum_{i=1}^{n}(-1)^{i + 1}a_{i1} \cdot \det C_{i1}\]
+    \end{mideea}
+\end{document}

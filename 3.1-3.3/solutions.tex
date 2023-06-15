@@ -1,0 +1,87 @@
+\part{Solutions}
+
+\section{Part I}
+\paragraph{Solution to Acitvity 1}
+
+\begin{enumerate}
+	\item \textbf{36}. Informally 
+		\[\det A \overset{2 \cdot \col_2 A}{\longrightarrow} 2\det A \overset{3 \cdot \row_2 A}{\longrightarrow} 3 \cdot 2 \det A 
+		   \overset{\text{Row swap}}{\longrightarrow} -6\det A \overset{\text{Row swap}}{\longrightarrow}6 \det A = 6 \cdot 6 = 36.\]
+
+	\item \textbf{0}. The third column is a linear combination of the first two columns, so the columns of the matrix do not form a linearly independent set. Hence,
+		the matrix is not invertible. The determinant is therefore 0.
+	
+	\item \textbf{No}. \[\det A = \det(LU) = \underbrace{\det L}_{1} \cdot \det U = \det U.\] If \(U\) is not invertible, then \(\det A = \det U = 0,\) so \(A\) is not
+		invertible as well. Vice versa.\footnote{Note that \(\det L = 1\) is die to the fact that we never scale a row. This argument would still work, but 
+		\(\det A = \det U\) won't necessarily be true.}
+
+	\item First, a picture.
+		\begin{figure}[!h]
+			\centering
+			\begin{tikzpicture}
+				\begin{axis}[axis lines=left, xmin=0, xmax=5, ymin=0, ymax=5,grid=major]
+					\draw[fill=teal, opacity=0.25] (axis cs:0,0) -- (axis cs:1,2) -- (axis cs:4,3) -- (axis cs:3,1)  -- (axis cs:0,0);
+					\addplot[->, semithick, domain=0:1, color=teal] {2*x} node[above, fill=white] {\(\begin{bmatrix}1 \\ 2\end{bmatrix}\)};
+					\addplot[->, semithick, domain=0:3, color=teal] {1/3*x} node[right, fill=white] {\(\begin{bmatrix}3 \\ 1\end{bmatrix}\)};
+					\addplot[->, dashed, domain=0:4] {3/4 * x} node[right, fill=white] {\(\begin{bmatrix}4 \\ 3\end{bmatrix}\)};
+				\end{axis}
+			\end{tikzpicture}
+			\caption{Pictorial representation of the problem.}
+		\end{figure}
+		\begin{enumerate}
+			\item The signed area of this shape is the determinant of the matrix \(\begin{bmatrix}1 & 3 \\ 2 & 1\end{bmatrix}\). We find that the
+			 	 determinant is \(-5\). The area is therefore 5.
+			\item We \emph{could} apply the transformation on each point and find the determinant of a new matrix, but a simpler way is to rely on the formula
+				\[V_T = V_S \cdot \lvert \det A \rvert.\]
+				Applying the above formula, we get that \(V_T\) (the volume of the transformed shape) is equal to \(V_S\) (the original volume) times
+				\(\lvert \det A \rvert = 3.\) So, \(V_T = 15\).
+		\end{enumerate}
+\end{enumerate}
+
+\section{Part II}
+\paragraph{Solution to Activity 2}
+\begin{enumerate}
+	\item \textbf{Yes.} Let \(\vec{x} = \begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix}\) and
+		\(\vec{y} = \begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n\end{bmatrix}.\) We know that \(x_1 + x_2 + \dots + x_n = 1 = y_1 + y_2 + \dots + y_n.\) Now,
+		\[
+			\frac{2}{3}\vec{x} + \frac{1}{3}\vec{y}
+			= \begin{bmatrix}2/3 x_1 \\ 2/3 x_2 \\ \vdots \\ 2/3 x_n\end{bmatrix} +
+			   \begin{bmatrix}1/3y_1 \\ 1/3y_2 \\ \vdots \\ 1/3 y_n\end{bmatrix}.
+		\]
+		We need to check that the entries of \(\frac{2}{3}\vec{x} + \frac{1}{3}\vec{y}\) add up to one.
+		\begin{align*}
+			& \frac{2}{3}x_1 + \frac{2}{3} x_2 + \dots + \frac{2}{3}x_n + \frac{1}{3}y_1 + \frac{1}{3}y_2 + \dots + \frac{1}{3}y_n \\[0.5em]
+	             = &\frac{2}{3}(x_1 + x_2 + \dots + x_n) + \frac{1}{3}(y_1 + y_2 + \dots + y_n) \\[0.5em]
+		     = &\frac{2}{3} + \frac{1}{3} = 1
+		\end{align*}
+		The entries of \(\frac{2}{3}\vec{x} + \frac{1}{3}\vec{y}\) add up to 1; since all the entries are positive---by the hypothesis, and the fact that the
+		scalars 1/3 and 2/3 are also positive---, \(\frac{2}{3}\vec{x} + \frac{1}{3}\vec{y}\) is a probability vector.
+	\begin{enumerate}
+		\item There are actually multiple valid answers for this question. So, please note the states the columns correspond to.
+			\NiceMatrixOptions{
+				code-for-first-row=\color{teal},
+				code-for-first-col=\color{purple},
+			}
+			\[
+				\begin{bNiceMatrix}[first-row,first-col]
+				   	&   A   &   B   &    C   \\
+				     A & 0.5  & 0.25 & 0.2 \\
+				     B & 0.5  &  0.5  & 0.5 \\
+				     C &  0   &  0.25 & 0.3
+				\end{bNiceMatrix}
+			\]
+			The states in teal denote the {\color{teal} from}, and the states in purple denote the states that {\color{purple} receive}.
+		\item Finding the ``long-term trend" of the chain corresponds to finding the steady-state vector. 
+			\begin{align*}
+				\begin{bmatrix}0.5 & 0.25 & 0.2 \\ 0.5 & 0.5 & 0.5 \\ 0 & 0.25 & 0.3\end{bmatrix} - I_3 &= 
+				\begin{bmatrix}-0.5 & 0.25 & 0.2 \\ 0.5 & -0.5 & 0.5 \\ 0 & 0.25 & -0.7\end{bmatrix} 
+				\sim \begin{bmatrix}0.5 & -0.5 & 0.5 \\ 0 & -0.25 & 0.7 \\ 0 & 0.25 & -0.7\end{bmatrix} \\[0.5em]
+				&\sim \begin{bmatrix}1 & -1 & 1 \\ 0 & 1 & - 14/5 \\ 0 & 0 & 0\end{bmatrix} 
+				\sim \begin{bmatrix}1 & 0 & 1 - 14/5 \\ 0 & 1 & -14/5 \\ 0 & 0 & 0\end{bmatrix}
+			\end{align*}
+			From here we see that \(\vec{x} = t\begin{bmatrix}9/5 \\ 14/5 \\ 1\end{bmatrix}.\) However, the sum of the entries should add up to one, and
+			so \(\vec{q} = \displaystyle \frac{5}{28}\begin{bmatrix}9/5 \\ 14/5 \\ 1\end{bmatrix}.\)
+
+			You can verify that this is the steady-state vector by left-nultiplying it with the matrix.
+	\end{enumerate}
+\end{enumerate}

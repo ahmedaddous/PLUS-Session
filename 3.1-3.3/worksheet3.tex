@@ -2,12 +2,14 @@
 
 \usepackage{amssymb}
 \usepackage{amsmath}
-% \usepackage{pgfplots}
+\usepackage{pgfplots}
 \usepackage[margin=1in]{geometry}
 \usepackage{fancyhdr}
 \usepackage{xcolor}
 \usepackage{array}
-%\usetikzlibrary{mindmap}
+\usepackage{tikz}
+\usepackage{nicematrix}
+\usetikzlibrary{positioning}
 
 \title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
 \date{Summer 2023}
@@ -96,7 +98,7 @@
                 \begin{vmatrix}
                     g &  2h & i \\
                     a &  2b & c \\
-                    3d & 6e & 6f \\
+                    3d & 6e & 3f \\
                 \end{vmatrix}
                 \)?
             \item What's 
@@ -113,7 +115,7 @@
                   triangular.})
             \item What's the area of the 
                   parallelogram whose vertices 
-                  are \((0, 0), (0, 1), (2, 3), (2, 4)\)? What's the area after
+                  are \((0, 0), (1, 2), (3, 1), (4, 3)\)? What's the area after
                   applying a mapping \(\vec{x} \mapsto \begin{bmatrix}
                       3 & 0 \\ 0 & 1
                   \end{bmatrix}\vec{x}\) on
@@ -131,11 +133,32 @@
             \(\frac{2}{3}\vec{x} + \frac{1}{3}\vec{y}\) also a probability 
             vector?
             \item Consider the following diagram
-            representing a Markov chain, find the
+            representing a Markov Chain, find the
             corresponding stochastic matrix, then
             find the long-term trend of the 
             chain.
+            \begin{figure}[!h]
+		\centering
+		\begin{tikzpicture}[semithick, node distance=43mm, main/.style = {draw, circle, minimum size=1cm}, lbl/.style={midway, fill=white, font=\small}]
+			\node[main] (A) {\(A\)};
+			\node[main] (B) [below right of=A] {\(B\)};
+			\draw[bend left=20, ->] (A) to node[lbl] {0.5} (B);
+			\draw[bend left=20, ->] (B) to node[lbl] {0.25} (A);
+
+			\node[main] (C) [below left of= A] {\(C\)};
+			\draw[bend right=20, ->] (A) to node[lbl] {0} (C);
+			\draw[bend right=20, ->] (C) to node[lbl] {0.2} (A);
+
+			\draw[->] (B) to node[lbl] {\small 0.25} (C);
+			\draw[bend right=20, ->] (C) to node[lbl] {0.5} (B);
+
+			\draw[->] (A) to [out=60, in=120, looseness=4.5] node[lbl] {0.5} (A);
+			\draw[->] (B) to [out=30, in=330, looseness=4.5] node[lbl] {0.5} (B);
+			\draw[->] (C) to [out=150, in=210, looseness=4.5] node[lbl]{0.3} (C);
+		\end{tikzpicture}
+	    \end{figure}
         \end{enumerate}
     \end{newactivity}
 
+%\input{solutions}
 \end{document}

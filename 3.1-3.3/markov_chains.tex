@@ -1,0 +1,58 @@
+\documentclass{beamer}
+
+\title[M.C.]{Markov Chains}
+\subtitle{MATH 1554: \textit{Linear Algebra}}
+\author{Ahmed Mohammed}
+\date{PLUS Session, June 2023}
+\institute{Georgia Institute of Technology}
+
+\usetheme{Berlin}
+\AtBeginSection[] {
+	\begin{frame}
+		\frametitle{Table Contents}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
+\DeclareMathOperator{\vspan}{Span}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{Quick Intro Into Markov Chains}
+\begin{frame}
+	\frametitle{Opening Activity: Introduction}
+	We wish to model a discrete dynamic system. For this, imagine a vector \(\vec{x}_0\) that describes the initial state of the system. It's a probability vector, so the entries
+	add up to 1 and are non-negative.\pause
+	
+	Now, the system transitions between ``states" each step. \[\vec{x}_0 \to \vec{x}_1 \to \dots \vec{x}_k \to \dots\] \pause
+
+	The sequence of probability vectors \(\{\vec{x}_n\}\) and the matrix \(P\) that controls the transition between states are collectively called the \textit{Markov Chain.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Opening Activity: Introduction}
+	The matrix \(P\) is called a \textit{stochastic matrix.} It's columns are also probability vectors. The characterstics of the system sometimes rely on \(P\). \pause
+	Regular vs. non-regular. \pause
+
+	For now, that doesn't matter. If \(P\) is a special type of matrix, we know that there exists one vector \(\vec{q}\) such that \[P\vec{q} = \vec{q}.\] \pause
+	We stabalize into that state.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Main Activity: Solve a Problem}
+	\begin{center}
+		Refer to Worksheet 3!
+	\end{center}
+
+\end{frame}
+
+\section{Review for Exam 2}
+\begin{frame}
+	\frametitle{Closing Activity: Review}
+	\begin{center}
+		Refer to worksheet 2!
+	\end{center}
+\end{frame}
+
+\end{document}

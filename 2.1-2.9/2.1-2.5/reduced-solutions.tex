@@ -1,0 +1,154 @@
+\part{Solutions*}
+
+\section{Part I}
+\paragraph{Solution to Activity 1}
+\begin{enumerate}
+	\item Use the fact that columns of \(AB\) are the linear combinations of the columns of \(A\). If 
+		\(B = \begin{bmatrix}\vec{b}_1 & \vec{b}_2 & \vec{b}_1 + \vec{b}_2\end{bmatrix}\). Then, 
+		\[AB = \begin{bmatrix}A\vec{b}_1 & A\vec{b}_2 & A(\vec{b}_1 + \vec{b}_2)\end{bmatrix} 
+		       = \begin{bmatrix}A\vec{b}_1 & A\vec{b}_2 & A\vec{b}_1 + A\vec{b}_2\end{bmatrix}\]
+		Notice that the last column of \(AB\) is the sum of the first two columns, meaning that the columns of \(AB\) are linearly \emph{dependent}.
+	\item You could use the above reasoning, but a better way to think about this is going back to the homogenous equation \(AB\vec{y} = \vec{0}\). Note that 
+		since the columns of \(B\) are linearly \emph{dependent}, the equation \(B\vec{x} = \vec{0}\) has a nontrivial solution. We could set 
+		\(\vec{y} = \vec{x}\) to get \(AB\vec{x} = 0\). But notice that \(AB\vec{x} = A(B\vec{x}) = A\vec{0} = \vec{0}.\) The equation \(AB\vec{x} = \vec{0}\)
+		has a nontrivial solution, so its columns are linearly \emph{dependent}. So, the answer is \textbf{yes}.
+\end{enumerate}
+
+\paragraph{Solution to Activity 2}
+\begin{enumerate}
+	\item The first few steps are
+		\begin{equation*} 
+			\begin{split}
+				\small
+				&\hphantom{{}\overset{\tiny E_{3}}{\sim}{}}
+				\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 2 & 1 & 0 & 0 & 1 & 0\\ 5 & 1 & 1 & 0 & 0 & 1\end{array}\!\!\right) 
+				\overset{\tiny E_{1}}{\sim}
+				\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 0 & 1 & -2 & -2 & 1 & 0\\ 5 & 1 & 1 & 0 & 0 & 1\end{array}\!\!\right)
+				\overset{\tiny E_{2}}{\sim}
+				\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 0 & 1 & -2 & -2 & 1 & 0\\ 0 & 1 & -4 & -5 & 0 & 1\end{array}\!\!\right) \\
+				&\overset{\tiny E_{3}}{\sim}
+				\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 0 & 1 & -2 & -2 & 1 & 0\\ 0 & 0 & -2 & -3 & -1 & 1\end{array}\!\!\right) \sim \dots
+			\end{split}
+		\end{equation*}
+		We've reached the REF of the matrix by just applying 3 row operations, which are 
+		\[E_1 = \begin{pmatrix}1 & 0 & 0 \\ -2 & 1 & 0 \\ 0 & 0 & 1\end{pmatrix} \quad E_2 = \begin{pmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ -5 & 0 & 1\end{pmatrix}
+		\quad E_3 = \begin{pmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -1 & 1 \end{pmatrix}.\]
+		Anyways, moving on
+		\begin{equation*}
+			\begin{split}
+			\small
+			\dots &\sim
+			\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 0 & 1 & 0 & 1 & 2 & -1\\ 0 & 0 & -2 & -3 & -1 & 1\end{array}\!\!\right)
+			\sim 
+			\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 1 & 1 & 0 & 0\\ 0 & 1 & 0 & 1 & 2 & -1\\ 0 & 0 & -2 & -3 & -1 & 1\end{array}\!\!\right) \\
+			&\sim 
+			\left(\!\!\begin{array}{ccc|ccc}1 & 0 & 0 & -1/2 & -1/2 & 1/2\\ 0 & 1 & 0 & 1 & 2 & -1\\ 0 & 0 & 1 & 3/2 & 1/2 & -1/2\end{array}\!\!\right) = A^{-1}
+			\end{split}
+		\end{equation*}
+	\item We've already written out the elementary matrices in the previous part. Now, to combine them, you \emph{could} multiply them out. A simpler way is 
+		to realize that multiplying (lower triangular) elementary matrices essentially ``fills" in the lower part of the matrix. That is,
+		\[\begin{pmatrix}1 & 0 & 0 \\ \color{magenta} -2 & 1 & 0 \\ 0 & 0 & 1\end{pmatrix}
+		   \begin{pmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ \color{teal} -5 & 0 & 1\end{pmatrix}
+		   \begin{pmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & \color{red}-1 & 1 \end{pmatrix} 
+		= \begin{pmatrix}1 & 0 & 0 \\ \color{magenta}-2 & 1 & 0 \\ \color{teal} -5 & \color{red}-1 & 1 \end{pmatrix}\]
+
+	\item \[{\color{teal} AB} = {\color{orange} CA} = {\color{magenta} I_n} \implies C{\color{teal} AB} = C \cdot {\color{magenta}I_n}\implies ({\color{orange}CA}){\color{teal}B} =  C \implies B = C.\] 
+		You could also cite the Invertible Matrix Theorem (IMT), stating that each square matrix has
+		only one unique inverse.
+\end{enumerate}
+
+\paragraph{Solution to Activity 3}
+\begin{enumerate}
+	\item \textbf{True} Every invertible matrix \(A \in \mathbb{R}^{m \times n}\) possesses \(n\) pivots, meaning that there is a pivot in every row and column. It follows
+		then that the every invertible matrix's RREF is the identity matrix \(I_n\). You could also just cite IMT as the reasoning.
+	\item \textbf{True} Again, you can just cite IMT. The main reasoning here is the fact that the mapping \(\vec{x} \mapsto A\vec{x}\) is onto, therefore the standard
+		matrix \(A\) must have \(n\) pivots. This means that it's row equivalent to the corresponding idenity matrix \(I_n\), which means it's invertible by IMT.
+	\item \textbf{True} Since the transformation is one-to-one, that means that there's \(n\) pivot positions in the matrix. We have \(n\) rows in the matrix (Why?) and
+		so the columns of the matrix span \(\mathbb{R}^n\).
+	\item \textbf{False} A square invertible matrix cannot have multiple inverses. Look at \textbf{Activity 2} (Question 3).
+\end{enumerate}
+
+\paragraph{Solution to Activity 4}
+\begin{enumerate}
+	\item There are multiple ways to solve this problem. I go with the ``standard" approach. We need a matrix 
+		\(A^{-1} = \begin{bmatrix}X & Y \\ W & Z \end{bmatrix}\) such that \(AA^{-1} = A^{-1}A = I_{2n}.\) We need
+		\[\begin{bmatrix}B & I_n \\ 0 & C \end{bmatrix}\begin{bmatrix}X & Y \\ W & Z \end{bmatrix} = \begin{bmatrix}I_n & 0 \\ 0 & I_n\end{bmatrix}.\]
+		If we multiply the left-side out, we get
+		\[\begin{bmatrix}BX + W & BY + Z \\ CW & CZ \end{bmatrix}= \begin{bmatrix}I_n & 0 \\ 0 & I_n\end{bmatrix}.\]
+		So, we need
+		\begin{align*}
+			BX + W &= I \implies X = B^{-1}\\
+			BY + Z &= 0 \implies Y = -B^{-1}C^{-1}\\
+			CW &= 0 \implies W = 0\\
+			CZ &= I \implies Z = C^{-1}
+		\end{align*}
+	\item The dimensions of \(H\) are \(q \times p\), and the dimensions of \(A\) are \((m + q) \times (p + l)\).
+
+\paragraph{Solution to Activity 5}
+\begin{enumerate}
+	\item Every invertible matrix could be written as the product of elementary matrices. Since \(B\) is invertible, that means \(B = E_p\dots E_3E_2E_1\). Substituting 
+		that in, we get that \(A = (E_p\dots E_3E_2E_1)C\). Since \(C\) is left multiplied by a bunch of elementary matrices, we know that there is a sequence of row
+		operations that when applied to \(C\) produce \(A\). Hence, \(A \sim C\).
+	\item The matrix we found was \(\begin{pmatrix}1 & 0 & 0 \\ \color{magenta}-2 & 1 & 0 \\ \color{teal} -5 & \color{red}-1 & 1 \end{pmatrix}\). The way 
+		inverses work for the product of (lower trangular) elementary matrix is that you negate the entries under the main diagonal. (It might be worthwhile to 
+		convince yoursellf why.) Therefore, in this case, 
+		\[\begin{pmatrix}1 & 0 & 0 \\ \color{magenta}-2 & 1 & 0 \\ \color{teal} -5 & \color{red}-1 & 1 \end{pmatrix}^{-1} 
+		= \begin{pmatrix}1 & 0 & 0 \\ \color{magenta}2 & 1 & 0 \\ \color{teal} 5 & \color{red}1 & 1 \end{pmatrix}.\] The \(LU\)-factorization of the matrix 
+		\(A\) is therefore \[\begin{pmatrix}1 & 0 & 1 \\ 2 & 1 & 0 \\ 5 & 1 & 1\end{pmatrix} = \begin{pmatrix}1 & 0 & 0 \\ \color{magenta}2 & 1 & 0 \\ \color{teal} 5 & \color{red}1 & 1 \end{pmatrix}\begin{pmatrix}1 & 0 & 1 \\ 0 & 1 & -2 \\ 0 & 0 & -2 \end{pmatrix}\] 
+
+	\item We need \(\vec{x}\) such that \(A\vec{x} = L\underbrace{(U\vec{x})}_{\vec{y}} = L\vec{y} = \begin{pmatrix}1 \\ 3 \\ 1\end{pmatrix}.\) We can now solve
+		for the simpler system \(L\vec{y} = \begin{pmatrix}1 \\ 3 \\ 1\end{pmatrix}\) first then solve for \(U \vec{x} = \vec{y}.\)
+
+		For \(\vec{y}\):
+			\[\left(\!\!\begin{array}{ccc|c}1 & 0 & 0 & 1 \\ 2 & 1 & 0 & 3 \\ 5 & 1 & 1 & 1\end{array}\!\!\right) 
+			  \sim
+			  \left(\!\!\begin{array}{ccc|c}1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 1 \\ 0 & 1 & 1 & -4\end{array}\!\!\right)
+			  \sim
+			  \left(\!\!\begin{array}{ccc|c}1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 1 \\ 0 & 0 & 1 & -5\end{array}\!\!\right)				
+			\]
+		So, \(\vec{y} = \begin{pmatrix}1 \\ 1 \\ -5\end{pmatrix}\). Now, to find \(\vec{x}\), solve the system \(U\vec{x} = \vec{y}.\)
+			\[\left(\!\!\begin{array}{ccc|c}1 & 0 & 1 & 1 \\ 0 & 1 & -2 & 1 \\ 0 & 0 & -2 & -5 \end{array}\!\!\right) 
+			  \sim
+			   \left(\!\!\begin{array}{ccc|c}1 & 0 & 1 & 1 \\ 0 & 1 & -2 & 1 \\ 0 & 0 & -2 & -5 \end{array}\!\!\right)
+			  \sim \dots \sim
+			  \left(\!\!\begin{array}{ccc|c}1 & 0 & 0 & -3/2 \\ 0 & 1 & 0 & 6 \\ 0 & 0 & 1 & 5/2 \end{array}\!\!\right)
+			\]
+		So, \(\vec{x} = \begin{pmatrix}-3/2 \\ 6 \\ 5/2\end{pmatrix}\).
+\end{enumerate}
+\end{enumerate}
+
+\section{Part II}
+
+\paragraph{Solution to Activity 6}
+\begin{enumerate}
+	\item \textbf{No} It's important to realize that by ``line," we mean the subset of vectors of \(\mathbb{R}^n\) such that the ``tip" of the vector touches the line.
+				  Anyhow, sometimes we have ``lines" in \(\mathbb{R}^n\) that are not subspaces (such as the solutionset of an inhomogenous system.) The line
+				  must pass through the origin in order to be a subspace.
+	\item \textbf{Yes} \[A(2\vec{x} - 2\vec{y}) = 2A\vec{x} - 2A\vec{y} = 2\vec{b} - 2\vec{b} = \vec{0}.\]
+	\item \textbf{No!}
+\end{enumerate}
+
+\paragraph{Solution to Activity 7}
+\begin{enumerate}
+	\item \textbf{2} Notice that every vector \(\vec{v} \in \mathcal{H}\) could be decomposed as follows:
+		\begin{align*}
+			\vec{v} = \begin{bmatrix}a + b \\ a \\ b\end{bmatrix} &= \begin{bmatrix}a \\ a \\ 0\end{bmatrix} + \begin{bmatrix}b \\ 0 \\ b\end{bmatrix} \\
+											&= a\begin{bmatrix}1 \\ 1 \\ 0\end{bmatrix} + b\begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}, \quad a, b \in \mathbb{R}
+		\end{align*}
+		Notice then that \(\mathcal{H}\) is nothing but the span of a linearly independent set of vectors. This set forms a basis for \(\mathcal{H}\). Since there are two
+		vectors in the basis, \(\dim \mathcal{H} = 2\).
+
+	\item If there are 10 pivot rows in \(A\), then there are also 10 pivot columns. Hence, \(\dim(\nullspace A) = n - \rank A = 16 - 10 = 6.\)
+
+	\item There are two pivot positions in the matrix. Hence, the dimension of the column space is 2, and the dimension of the null space is 1.
+	\item For reference, the matrix is \(\begin{pmatrix}1 & 0 & 1 \\ 2 & 1 & 0 \\ 5 & 1 & 1\end{pmatrix}.\) The basis formed is therefore 
+		\[\mathcal{B} = \left\{\!\begin{pmatrix}1 \\ 2 \\ 5\end{pmatrix}, \begin{pmatrix}0 \\ 1 \\ 1\end{pmatrix}, \begin{pmatrix}1 \\ 0 \\ 1\end{pmatrix}\!\right\}.\]
+		Since \(\mathcal{B}\) forms a basis, we know that we could write the vector \(\begin{pmatrix}1 \\ 2 \\ 1\end{pmatrix}\) as a linear combination of the basis vectors.
+\[\begin{pmatrix}1 \\ 2 \\ 1\end{pmatrix} = c_1\begin{pmatrix}1 \\ 2 \\ 5\end{pmatrix} + c_2\begin{pmatrix}0 \\ 1 \\ 1\end{pmatrix} + c_3\begin{pmatrix}1 \\ 0 \\ 1\end{pmatrix} \implies \begin{pmatrix}1 & 0 & 1 \\ 2 & 1 & 0 \\ 5 & 1 & 1\end{pmatrix}\begin{pmatrix}c_1 \\ c_2 \\ c_3\end{pmatrix} = \begin{pmatrix}1 \\ 2 \\1 \end{pmatrix}\]
+
+		Note \(\left[\!\begin{pmatrix}1 \\ 2 \\1 \end{pmatrix}\!\right]_{\mathcal{B}} = \begin{pmatrix}c_1 \\ c_2 \\ c_3\end{pmatrix}\). Solving the inhomogenous system
+		is equivalent to finding the \(\mathcal{B}\)-coordinates of the vector.
+		\[\left(\!\!\begin{array}{ccc|c}1 & 0 & 1 & 1\\ 2 & 1 & 0 & 2\\ 5 & 1 & 1 & 1\end{array}\!\!\right) \sim \dots \sim \left(\!\!\begin{array}{ccc|c}1 & 0 & 0 & -1\\ 0 & 1 & 0 & 4\\ 0 & 0 & 1 & 2\end{array}\!\!\right).\]
+		So, 
+		\(\left[\!\begin{pmatrix}1 \\ 2 \\1 \end{pmatrix}\!\right]_{\mathcal{B}} = \begin{pmatrix}c_1 \\ c_2 \\ c_3\end{pmatrix} = \begin{pmatrix}-1 \\ 4 \\ 2\end{pmatrix}.\)
+\end{enumerate}

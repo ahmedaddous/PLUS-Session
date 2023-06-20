@@ -139,7 +139,7 @@
             chain.
             \begin{figure}[!h]
 		\centering
-		\begin{tikzpicture}[semithick, node distance=43mm, main/.style = {draw, circle, minimum size=1cm}, lbl/.style={midway, fill=white, font=\small}]
+		\begin{tikzpicture}[thin, node distance=43mm, main/.style = {draw, circle, minimum size=1cm}, lbl/.style={midway, fill=white, font=\small}]
 			\node[main] (A) {\(A\)};
 			\node[main] (B) [below right of=A] {\(B\)};
 			\draw[bend left=20, ->] (A) to node[lbl] {0.5} (B);
@@ -160,5 +160,5 @@
         \end{enumerate}
     \end{newactivity}
 
-%\input{solutions}
+\input{solutions}
 \end{document}

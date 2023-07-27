@@ -6,9 +6,8 @@
 		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
 			true & false & \\
 			\specialrule{\lightrulewidth}{0.25em}{1.25em}
-			\dbubble & \bubble & If \(Q \colon \mathbb{R}^n \to \mathbb{R},\) \(\vec{x} \mapsto \vec{x}^TA\vec{x}\) is a postive-definite quadratic 
-						      form, then the largest eigenvalue of the matrix \(A\) is the largest value the quadratic form takes under the 
-						      constraint \(\|\vec{x}\| = 1\). \\[0.75em]
+			\bubble & \dbubble & If \(Q \colon \mathbb{R}^n \to \mathbb{R},\) \(\vec{x} \mapsto \vec{x}^TA\vec{x}\) is a postive-definite quadratic 
+						      form, then the largest eigenvalue of the matrix \(A\) is the largest value the quadratic form takes. \\[0.75em]
 			\bubble & \dbubble & If the smallest singular value of \(A\) is 2, then the quadratic form \(Q(\vec{x}) = \|A\vec{x}\|^2 - \|\vec{x}\|^2\) is
 						      indefinite. \\[0.75em]
 			\dbubble & \bubble & If \(P \in \mathbb{R}^{m \times m}\) is an orthogonal matrix, then \(A \in \mathbb{R}^{m \times n}\) and 
@@ -94,7 +93,7 @@
 \section{Solutions to \textit{Short Answers}}
 \begin{enumerate}
 	\item 
-	\[\begin{bmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{bmatrix} = \underbrace{\begin{bmatrix}1/\sqrt{2} & 0  & -1/\sqrt{2} \\ 0 & 1 & 0 \\ 1/\sqrt{2} & 0 & 1/\sqrt{2}\end{bmatrix}}_U \underbrace{\begin{bmatrix}2 & 0 \\ 0 & 0 \\ 0 & 0\end{bmatrix}}_\Sigma\underbrace{\begin{bmatrix}1/\sqrt{2} & -1/\sqrt{2} \\ 1/\sqrt{2} & 1/\sqrt{2}\end{bmatrix}}_{V^T}\].
+	\[\begin{bmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{bmatrix} = \underbrace{\begin{bmatrix}1/\sqrt{2} & 0  & -1/\sqrt{2} \\ 0 & 1 & 0 \\ 1/\sqrt{2} & 0 & 1/\sqrt{2}\end{bmatrix}}_U \underbrace{\begin{bmatrix}2 & 0 \\ 0 & 0 \\ 0 & 0\end{bmatrix}}_\Sigma\underbrace{\begin{bmatrix}1/\sqrt{2} & -1/\sqrt{2} \\ 1/\sqrt{2} & 1/\sqrt{2}\end{bmatrix}}_{V^T}.\]
 		\begin{enumerate}
 			\item \(\left\{ \begin{bmatrix}1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}\end{bmatrix} \right\}\).\footnote{In general, if \(\rank A = r\), then the first \(r\)
 				 columns of \(U\) are form an orthonormal basis for the column space. The first \(r\) columns of \(V\) would also form an orthonormal

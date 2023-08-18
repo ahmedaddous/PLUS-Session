@@ -1,0 +1,103 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+
+\begin{document}
+%\(
+%	\left[
+%	\begin{array}{ccc}
+%		\cellcolor{green!10} 1 & \cellcolor{olive!10}0 & \cellcolor{olive!10}0 \\
+%		1 & 1 & 0 \\
+%		0 & 0 & 1
+%	\end{array}\right]
+%	\left[
+%	\begin{array}{ccc}
+%		\rowcolor{green!10}
+%		3 & 1 & 4 \\
+%		\rowcolor{olive!10}
+%		4 & 5 & 9 \\
+%		\rowcolor{olive!10}
+%		2 & 6 & 5
+%	\end{array}
+%	\right] \implies 
+%	\begin{array}{ccc@{\hspace{0pt}}c}
+%		   &    \cellcolor{green!10} 1     & \cdot & \left[\begin{array}{ccc}\rowcolor{green!10}3 & 1 & 4\end{array}\right] \\[0.25em]
+%		+ &    \cellcolor{olive!10}   0     & \cdot & \left[\begin{array}{ccc}\rowcolor{olive!10}4 & 5 & 9\end{array}\right]  \\[0.25em]
+%		+ &    \cellcolor{olive!10}   0     & \cdot & \left[\begin{array}{ccc}\rowcolor{olive!10}2 & 6 & 5\end{array}\right]  \\[0.25em]
+%		  \cmidrule(lr){1-4}                                                                                                         
+%		   &  \cellcolor{white}             &         & \left[\begin{array}{ccc}3 & 1 & 4\end{array}\right]
+%	\end{array}
+%\)
+
+%\(
+%	\left[
+%	\begin{array}{ccc}
+%		1 & 0 & 0 \\
+%		\cellcolor{green!10} 1 &\cellcolor{green!10}  1 & \cellcolor{olive!10} 0 \\
+%		0 & 0 & 1
+%	\end{array}\right]
+%	\left[
+%	\begin{array}{ccc}
+%		\rowcolor{green!10}
+%		3 & 1 & 4 \\
+%		\rowcolor{green!10}
+%		4 & 5 & 9 \\
+%		\rowcolor{olive!10}
+%		2 & 6 & 5
+%	\end{array}
+%	\right] \implies 
+%	\begin{array}{ccc@{\hspace{0pt}}c}
+%		   &    \cellcolor{green!10} 1     & \cdot & \left[\begin{array}{ccc}\rowcolor{green!10}3 & 1 & 4\end{array}\right] \\[0.25em]
+%		+ &    \cellcolor{green!10} 1     & \cdot & \left[\begin{array}{ccc}\rowcolor{green!10}4 & 5 & 9\end{array}\right]  \\[0.25em]
+%		+ &    \cellcolor{olive!10}   0     & \cdot & \left[\begin{array}{ccc}\rowcolor{olive!10}2 & 6 & 5\end{array}\right]  \\[0.25em]
+%		  \cmidrule(lr){1-4}                                                                                                         
+%		   &  \cellcolor{white}          &         & \left[\begin{array}{ccc}7 & 6 & 13\end{array}\right]
+%	\end{array}
+%\)
+%
+\(
+	\left[
+	\begin{array}{ccc}
+		1 & 0 & 0 \\
+		1 & 1 & 0 \\
+		\cellcolor{olive!10} 0 & \cellcolor{olive!10} 0 & \cellcolor{green!10} 1
+	\end{array}\right]
+	\left[
+	\begin{array}{ccc}
+		\rowcolor{olive!10}
+		3 & 1 & 4 \\
+		\rowcolor{olive!10}
+		4 & 5 & 9 \\
+		\rowcolor{green!10}
+		2 & 6 & 5
+	\end{array}
+	\right] \implies 
+	\begin{array}{ccc@{\hspace{0pt}}c}
+		   &    \cellcolor{olive!10}   0     & \cdot & \left[\begin{array}{ccc}\rowcolor{olive!10}3 & 1 & 4\end{array}\right] \\[0.25em]
+		+ &    \cellcolor{olive!10}   0     & \cdot & \left[\begin{array}{ccc}\rowcolor{olive!10}4 & 5 & 9\end{array}\right]  \\[0.25em]
+		+ &    \cellcolor{green!10} 1     & \cdot & \left[\begin{array}{ccc}\rowcolor{green!10}2 & 6 & 5\end{array}\right]  \\[0.25em]
+		  \cmidrule(lr){1-4}                                                                                                         
+		   &  \cellcolor{white}          &         & \left[\begin{array}{ccc}2 & 6 & 5\end{array}\right]
+	\end{array}
+\)
+
+
+%\[
+%	\begin{array}{ccc}
+%		\downarrow & \downarrow & \downarrow \\[-0.5em]
+%	\end{array}
+%\]
+%\[
+%	\begin{bmatrix}1 & 0 & 0 \\[0.25em] 1 & 1 & 0 \\[0.25em] 0 & 0 & 1\end{bmatrix}
+%	\begin{bmatrix}3 & 1 & 4 \\[0.25em] 4 & 5 & 9 \\[0.25em] 0 & 0 & 1\end{bmatrix}
+%	\begin{array}{cc@{\cdot}c}
+%		   & 1 & \begin{bmatrix}3 & 1 & 4\end{bmatrix} \\[0.25em]
+%		+ & 1 & \begin{bmatrix}4 & 5 & 9\end{bmatrix} \\[0.25em]
+%		+ & 0 & \begin{bmatrix}2 & 6 & 5\end{bmatrix} \\
+%		\hline
+%	\end{array}
+%\]
+\end{document}

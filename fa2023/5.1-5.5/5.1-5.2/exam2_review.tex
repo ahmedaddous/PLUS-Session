@@ -1,0 +1,112 @@
+\documentclass[titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Review For Exam 2}}
+\date{Summer 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Summer 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\section{\centering T \& F}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+		true & false & \\
+		\specialrule{\lightrulewidth}{0.25em}{1.25em}
+		\bubble & \bubble & For any \(A \in \mathbb{R}^{n \times n},\) \(A\) has \(n\) eigenvalues. \\[0.75em]
+		\bubble & \bubble & For any \(A \in \mathbb{R}^{n \times n},\) \(A\) and \(A^T\) have the same eigenvalues. \\[0.75em]
+		\bubble & \bubble & If \(A\vec{x} = A\vec{y}\) for any \(\vec{x}, \vec{y} \in \mathbb{R}^n\), then \(\colspace A = \{\vec{0}\}\). \\[0.75em]
+		\bubble & \bubble & If \(\lambda = 0\) is not an eigenvalue for a square matrix \(A \in \mathbb{R}^{n \times n}\), 
+					      then the columns of \(A\) do not form a basis for \(\mathbb{R}^n\).\\[0.75em]
+		\bubble & \bubble & If \(\dim (\colspace A) = 4\) for \(A \in \mathbb{R}^{6 \times 4}\), then \(\dim (\nullspace A) = 2\). \\[0.75em]
+		\bubble & \bubble & If \(A, B \in \mathbb{R}^{n \times n}\) share an eigenvector \(\vec{v} \in \mathbb{R}^n\) with a corresponding eigenvalue of 
+					      \(\lambda_1, \lambda_2\), then \(\lambda_1\lambda_2\) is an eigenvalue of \(AB\). \\[0.75em]
+		\bubble & \bubble & If the mapping \(\vec{x} \mapsto A\vec{x}\) scales a region in \(\mathbb{R}^2\) by a factor of 3, then \(\det A = 3\). \\[0.75em]
+		\bubble & \bubble & For \(A = \begin{bmatrix}1 & 2 & 1 \\ 3 & 1 & 4\end{bmatrix}\), \(\colspace A\) is a two-dimensional subspace of 
+					      \(\mathbb{R}^3\) and \(\nullspace A\) is a one-dimensional subspace of \(\mathbb{R}^2\). \\[0.75em]
+		\bubble & \bubble & The number of pivots columns in \(U\) are different than \(A\) for an \(LU\)-decomposition if \(A = LU\). \\[0.75em]
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{\centering Possible/Impossible}
+Indicate whether it is possible for the following statements to be true. If not, mark them as \textit{impossible}.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+		possible & impossible & \\
+		\specialrule{\lightrulewidth}{0.25em}{1.25em}
+		\bubble & \bubble & \(A \in \mathbb{R}^{3 \times 3}\) with \(\nullspace A = \vspan\left\{\begin{bmatrix}1 \\ 1 \\ 0\end{bmatrix}, \begin{bmatrix}0 \\ 1 \\ 0\end{bmatrix}\right\}\) and \(\colspace A = \vspan\left\{\begin{bmatrix}2 \\ 1 \\ 0\end{bmatrix}, \begin{bmatrix}0 \\ 1 \\ 1\end{bmatrix}\right\}\).\\[2em]
+		\bubble & \bubble & A matrix whose null space and column space are spanned by the same vector. \\[0.75em]
+		\bubble & \bubble & \(A \in \mathbb{R}^{5 \times 4}\) with \(\dim(\colspace A) = 2 \cdot \dim(\nullspace A)\). \\[0.75em]
+		\bubble & \bubble & A singular matrix with a non-zero eigenvalue. \\[0.75em]
+		\bubble & \bubble & \(\lambda = 0\) is an eigenvalue of an \(n \times n\) matrix but the columns span \(\mathbb{R}^n\). \\[0.75em]
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{\centering Examples}
+Provide an example of a matrix that satisfies the stated properties.
+\begin{enumerate}
+	\item A \(3 \times 2\) matrix whose null space is spanned by the set \(\left\{\begin{bmatrix}1 \\ 2\end{bmatrix}\right\}\) and whose column space is spanned by the set 
+		\(\left\{\begin{bmatrix}1 \\ 0 \\ 2\end{bmatrix}\right\}\).
+\end{enumerate}
+
+\section{\centering Fill the Box}
+
+\begin{enumerate}
+	\item Consider the transformation that projects all vectors in \(\mathbb{R}^2\) to the line \(x_1 = x_2\). List all of the real eigenvalues of the transformation.
+		\hfill\fbox{\phantom{\(\lambda_1 = 1, \lambda_2 = 0\)}}
+	\item Consider the transformation that reflects all vectors in \(\mathbb{R}^2\) across the line formed by \(\vspan\left\{\begin{bmatrix}1 \\ 1\end{bmatrix}\right\}\). List all of the real 
+		eigenvalues of the transformation, and an eigenvector from each respective eigenspace.
+
+		\hfill\fbox{\phantom{\(\lambda_1 = 1, \lambda_2 = 0, \begin{bmatrix}1 \\ 1\end{bmatrix}\)}}
+	\item Find all possible \(h\) such that the matrix is singular. (\textit{Hint: Use the determinant.}) \[\begin{bmatrix}1 & 2 & 3 \\ h & 4 & 1 \\ 3 & 5 & 9\end{bmatrix}\]
+		\[h = \fbox{\phantom{h, h}}\]
+
+	\item If \(\det A = 3\), and \(B\) is row-equivalent to \(A\) such that a row of \(B\) was scaled by 2, yielding the new matrix \(B'\), and two rows of \(B'\) were exchanged, yielding \(A\), 
+		what is \(\det B\)? \hfill \fbox{\phantom{-3/2}}
+	
+	\item If \(A \in \mathbb{R}^{3 \times 4}\) with 3 pivot rows, then what is \(\dim(\nullspace A)\)? \hfill \fbox{\phantom{1}}
+
+	\item For any stochastic matrix \(P\), what is \(\det(P - I)\)? \hfill \fbox{\phantom{0}}
+
+	\item Let \(\mathcal{C} = \{\vec{v} \in \mathbb{R}^3 \mid A\vec{x} = \vec{v} \ \text{for some} \ \vec{x} \in \mathbb{R}^3\}\) and 
+		\(A = \begin{bmatrix}1 & 0 & 2 \\ 0 & 0 & 1 \\ 1 & 1 & 1\end{bmatrix}\), what is \(\dim \mathcal{C}\)? \hfill \fbox{\phantom{23}} 
+
+	\item Find the basis for the eigenspace corresponding to \(\lambda = 2\) for the matrix \[\begin{bmatrix}2 & 0 & 0 \\ -1 & 4 & -1 \\ -1 & 2 & 1\end{bmatrix}\] \hfill \fbox{\phantom{\(\begin{bmatrix}0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}\)}}.
+\end{enumerate}
+\newpage
+\input{solutions}
+\end{document}

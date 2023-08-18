@@ -1,0 +1,224 @@
+\documentclass[titlepage, a4paper, 10pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+% \usepackage{pgfplots}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{array}
+%\usetikzlibrary{mindmap}
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\date{Summer 2023}
+\author{Covering lessons: 2.1 -- 2.5 \& 2.8 -- 2.9}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Summer 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{activity}
+\setcounter{activity}{1}
+\newenvironment{newactivity}
+{
+	\noindent\textbf{Activity \theactivity}
+}
+{
+\stepcounter{activity}
+\par
+}
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+\part{2.1 -- 2.5}
+\section{\centering Matrix Operations (2.1)}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item For \(A \in \mathbb{R}^{m \times n}\) and \(B = \begin{bmatrix}\vec{b}_1 & \vec{b}_2 & \dots & \vec{b}_p\end{bmatrix} \in \mathbb{R}^{n \times p}\), 
+	\end{enumerate}
+			\footnotesize
+                 	\[
+                    		   AB = \begin{bmatrix}A\vec{b}_1 & A\vec{b}_2 & \dots & A\vec{b}_p\end{bmatrix}
+                         	    	= \begin{bmatrix}\row_1(A) \cdot B \\[0.5em] \row_2(A) \cdot B \\[0.5em] \vdots \\[0.5em] \row_m(A) \cdot B\end{bmatrix}
+		         	    	= \begin{bmatrix}
+							\row_1(A) \cdot \col_1(B)  & \dots  & \row_1(A) \cdot \col_p(B) \\
+							\row_2(A) \cdot \col_1(B)  & \dots  & \row_2(A) \cdot \col_p(B) \\ 
+							\vdots                              & \ddots &             \vdots                 \\
+							\row_m(A) \cdot \col_1(B) & \dots  & \row_m(A) \cdot \col_p(B)
+						\end{bmatrix}
+			\]
+			\normalsize \centering \textit{Row-column rule for matrix multiplication; equivalent to the other two methods.}
+\end{mideea}
+	\begin{newactivity}
+		Consider the following questions:
+		\begin{enumerate}
+			\item If \(A = \begin{bmatrix}1 & 0 & 3 \\ 1 & 5 & 6 \\ 2 & 1 & 1\end{bmatrix}\) and \(B = \begin{bmatrix}2 & 0 & -1\\ 3 & 1 & 1\\ 0 & 3 & 0\end{bmatrix}\), then what is the second column of \(AB\)? What is the second row?
+			\item If \(A \in \mathbb{R}^{3 \times 3}\) and \(B \in \mathbb{R}^{3 \times 3}\), and the third column of \(B\) is the sum of first two columns,
+				what can you say about the linear dependency of the columns of \(AB\)? Why is that? (\textit{Hint: \(B = \begin{bmatrix}\vec{b}_1 & \vec{b}_2 & \vec{b}_1 + \vec{b}_2\end{bmatrix}\)}. \(AB = \, ?\))
+			\item If the columns of \(A \in \mathbb{R}^{m \times n}\) form a linearly independent set and the columns of \(B \in \mathbb{R}^{n \times p}					\) do not, do the columns of \(AB\) form a linearly dependent set? (\textit{Consider the homogenous equation \(AB\vec{x} = \vec{0}\)}.)
+		\end{enumerate}
+	\end{newactivity}
+
+\section{\centering Inverses of Matrices (2.2)}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item If \(A \in \mathbb{R}^{n \times n}\) and there exists a matrix \(A^{-1}\) such that \(A A^{-1} = A^{-1}A = I_n\), then \(A\) is invertible.
+		\item \(A \ \text{is \emph{non-singular} (invertible)} \iff A\vec{x} = \vec{b} \ \text{is consistent with unique} \ \vec{x} \in \mathbb{R}^n\).
+		\item If \(A = \begin{bmatrix}a & b \\ c & d\end{bmatrix}\) and invertible, then 
+		\(A^{-1} = \displaystyle \frac{1}{ad -bc} \begin{bmatrix}-a & c \\ b & -d\end{bmatrix} \color{gray} (\text{Note:} \ ab - cd = \det A).\)
+	\end{enumerate}
+\end{mideea}
+
+\begin{newactivity}
+	\begin{enumerate}
+		\item What is the inverse of \(A = \begin{bmatrix}1 & 0 & 1 \\ 2 & 1 & 0 \\ 5 & 1 & 1\end{bmatrix}\)? Record the row operations you perform up to 
+			the point you reach the REF of \(A\), then complete finding the inverse as usual.
+		\item For each recorded row operation in the previous problem, write the corresponding elementary matrix. Multiply these matrices
+			together. (This'll help us later on!)
+		\item[3.] If \(A \in \mathbb{R}^{n \times n}\) and \(AB = CA = I_n\), is \(B = C\)?
+	\end{enumerate}
+\end{newactivity}
+
+\section{\centering Characteristics of Invertible Matrices (2.3)}
+	\begin{mideea}{0.9}
+	The Invertible Matrix Theorem (IMT) connects different statements and states that they are equivalent. They concern the characteristics of invertible 
+	matrices.
+	\end{mideea}
+\begin{newactivity}
+	Consider the following statements:
+	\begin{enumerate}
+		\item Is every invertible matrix row equivalent to the identity matrix? Why so?
+		\item If a transformation \(T \colon \mathbb{R}^{n} \to \mathbb{R}^n\) defined by \(\vec{x} \mapsto A\vec{x}\) is onto, then \(A\) is 
+			invertible.
+		\item If a transformation \(T \colon \mathbb{R}^n \to \mathbb{R}^n\) defined by \(\vec{x} \mapsto A\vec{x}\) is one-to-one, then the columns of
+			\(A\) necessarily span \(\mathbb{R}^n\).
+		\item It is possible that the columns of an invertible \(n \times n\) matrix \(A\) span \(\mathbb{R}^n\) but the rows do not.
+		\item An invertible matrix can have multiple inverses (e.g. one for each side).
+	\end{enumerate}
+\end{newactivity}
+
+\section{\centering Partition Matrices (2.4)}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item It is possible to dissect, or partition, a matrix into submatrices. 
+		\item All the submatrices in the same column must have the same number of columns. Likewise, all submatrices in the same row must have the 
+			same number of rows.
+	\end{enumerate}
+\end{mideea}
+
+	\begin{newactivity}
+		\begin{enumerate}
+			\item Given \(B, C, I_n \in \mathbb{R}^{n \times n}\) are all invertible and \(A = \begin{bmatrix}B & I_n \\ 0 & C\end{bmatrix}\), 
+				 find \(X, Y, W, Z\) in terms of \(B, C,\) such that \(A^{-1} = \begin{bmatrix}X & Y \\ W & Z\end{bmatrix}\). (\(I_n\) is the identity matrix.)
+			\item If \(A = \begin{bmatrix}Q & T \\ H & 0\end{bmatrix},\) where \(Q \in \mathbb{R}^{m \times p}\), \(T \in \mathbb{R}^{q \times l}\), and 
+				\(0 \in \mathbb{R}^{q \times l}\), what are the dimensions of \(H\)? Of \(A\)? 
+		\end{enumerate}
+	\end{newactivity}
+\section{\centering \(LU\)-Factorization (2.5)}
+\begin{mideea}{0.9}
+Many \(m \times n\) matrices could be factored into the product of an \(m \times m\) lower triangular invertible matrix called \(L\) and the matrix's REF, \(U\). To 
+find \(L\), keep track of the row-operations that get you to \(U\) and invert and combine them.
+\end{mideea}
+\begin{newactivity}
+	(Note: You may skip the first question).
+	\begin{enumerate}
+		% \item If we're working with elementary matrices of dimensions \(n \times n\), what row operation corresponds to the elementary matrices that are their own inverse?
+		\item If \(A = BC\), with \(A, C \in \mathbb{R}^{m \times n}\) and \(B \in \mathbb{R}^{m \times m}\) is invertible, then how come \(A\) is row-
+			equivalent to \(C\)?
+		\item Recall the matrix you found in \textbf{Activity 2} (Question 2). Find the inverse of that matrix, knowing that it's the product of elementary 
+			matrices. Then, find the \(LU\)-factorization of \(A = \begin{bmatrix}1 & 0 & 1 \\ 2 & 1 & 0 \\ 5 & 1 & 1\end{bmatrix}\).
+		\item Use the \(LU\)-factorization found in the previous question to solve the system \(A\vec{x} = \begin{bmatrix}1 \\ 3 \\ 1\end{bmatrix}\).
+	\end{enumerate}
+\end{newactivity}
+\newpage
+
+\part{2.8 -- 2.9}
+\section{\centering Subspaces of \(\mathbb{R}^n\) (2.8)}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item A \textbf{subspace} of \(\mathbb{R}^n\) is a subset of \(\mathbb{R}^n\) that has the following properties:
+			\begin{enumerate}
+				\item The zero vector is in the subset.
+				\item The sum of any two vectors in the subset is in the subset as well.
+				\item The multiple of any vector in the subset is in the subset as well.
+			\end{enumerate}
+		\item For \(A \in \mathbb{R}^{m \times n}\), \(\colspace A\) is the set of all linear combinations of the columns of \(A\). 
+			\[\colspace A = \{c_1\vec{a}_1 + c_2\vec{a}_2 + \cdots + c_n\vec{a}_n \mid c_1, c_2 \cdots, c_n \in \mathbb{R}\}\]
+		\item For \(A \in \mathbb{R}^{m \times n}\), \(\nullspace A\) is the set of all solutions to the homogenous equation \(A \vec{x} = \vec{0}\).
+			\[\nullspace A = \{\vec{x} \in \mathbb{R}^n \mid A\vec{x} = \vec{0}\}\]
+		\item A \textbf{basis} \(\mathcal{B}\) of a subspace \(H\) is a set of vectors satisfyig two properties:
+			\begin{enumerate}
+				\item \(\vspan \mathcal{B} = H\).
+				\item \(\mathcal{B}\) is a linearly independent set.
+			\end{enumerate}
+	\end{enumerate}
+\end{mideea}
+
+\begin{newactivity}
+	\begin{enumerate}
+		\item Is every line in \(\mathbb{R}^n\) a subspace?\footnote{When we say ``line", we're talking about a subset of \(\mathbb{R}^n\) where the 
+			vectors' ``tip" forms a single point of the line.}
+		\item Is the span of a set of vectors always a subsapce?
+		\item If \(A \vec{x} = A \vec{y} = \vec{b}\), for some \(A \in \mathbb{R}^{m \times n}\) and \(\vec{x}, \vec{y} \in \mathbb{R}^{n}\), is 
+			\(2\vec{x} - 2\vec{y} \in \nullspace A\)?
+		\item Find a basis for \(\colspace\biggl(\begin{bmatrix}1 & 6 & 4 \\ 1 & 3 & 0\end{bmatrix}\biggr)\) and 
+			\(\nullspace\biggl(\begin{bmatrix}1 & 6 & 4 \\ 1 & 3 & 0\end{bmatrix}\biggr)\).
+		\item Do the columns of a matrix always form a basis for its column space?
+	\end{enumerate}
+\end{newactivity}
+
+\section{\centering Dimension \& Rank}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item For a subspace \(H\), \(\dim H = \lvert \mathcal{B}\rvert\) (the numbers of vectors in any of its bases).
+		\item \(\dim(\colspace A) = \rank A =\# \ \text{pivot columns in} \ A\).
+		\item \(\dim(\nullspace A) = \# \ \text{non-pivot columns in} \ A\).
+		\item For any \(A \in \mathbb{R}^{m \times n}\), \(\dim(\colspace A) + \dim(\nullspace A) = \rank A + \dim(\nullspace A) = n.\)
+	\end{enumerate}
+\end{mideea}
+	\begin{newactivity}
+		\begin{enumerate}
+			\item Find the dimension of the column space and null space of \(A\) in \textbf{Activity 6} (Question 5).
+			\item Find \([\begin{pmatrix}1 & 2 & 1\end{pmatrix}^T]_{\mathcal{B}}\) under the basis \(\mathcal{B}\) that is formed by the
+				columns of \(A\) in \textbf{Activity 5} (Question 2).
+		\end{enumerate}
+	\end{newactivity}
+
+\input{solutions}
+\end{document}

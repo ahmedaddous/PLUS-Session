@@ -1,0 +1,189 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Final Exam Review}}
+\date{Summer 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Summer 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+% \fancyhead[C]{\textit{(6.1), (6.2), \& (6.3)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\section{\centering T \& F}
+	\begin{newquestion}
+		For the following statements, answer \textit{true} if the statement is always true, and \textit{false} otherwise.
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				true & false & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & If \(Q \colon \mathbb{R}^n \to \mathbb{R},\) \(\vec{x} \mapsto \vec{x}^TA\vec{x}\) is a postive-definite quadratic 
+							      form, then the largest eigenvalue of the matrix \(A\) is the largest value the quadratic form takes. \\[0.75em]
+				\bubble & \bubble & If the smallest singular value of \(A\) is 2, then the quadratic form \(Q(\vec{x}) = \|A\vec{x}\|^2 - \|\vec{x}\|^2\) is
+							      indefinite. \\[0.75em]
+				\bubble & \bubble & If \(P \in \mathbb{R}^{m \times m}\) is an orthogonal matrix, then \(A \in \mathbb{R}^{m \times n}\) and 
+							     \(PA\) have the same singular values. \\[0.75em]
+				\bubble & \bubble & If \(A \in \mathbb{R}^{n \times n}\), then \(\det A\) is the product of its singular values. \\[0.75em] 
+				\bubble & \bubble & If \(\det A = 3\) and \(A \in \mathbb{R}^{2 \times 2}\), then any linearly independent set of 2 vectors in 
+							      \(\mathbb{R}^2\) form a basis for \(\colspace A\). \\[0.75em]
+				\bubble & \bubble & For row-equivalent matrices \(A, B \in \mathbb{R}^{m \times n}\), if \(A\vec{x} = \vec{b}\) is consistent then so is
+							      \(B\vec{y} = \vec{b}\) for \(\vec{b} \in \mathbb{R}^m\), \(\vec{y}, \vec{x} \in \mathbb{R}^n\).\\[0.75em]
+				\bubble & \bubble & If \(A \in \mathbb{R}^{n \times n}\) has no zero entries, then \(\colspace A = \mathbb{R}^n\). \\[0.75em]
+				\bubble & \bubble & If \(\det A = 0\) then \(A\) has a row of 0s and \(A\vec{x} = \vec{b}\) is inconsistent for some 
+							      \(\vec{b} \in \mathbb{R}^m\). \\[0.75em]
+				\bubble & \bubble & Not all lines in \(\mathbb{R}^2\) are subspaces. \\[0.75em]
+				\bubble & \bubble & If \(A, B \in \mathbb{R}^{n \times n}\) and \(T_A\) scales a region in \(\mathbb{R}^n\) by twice the amount 
+							      \(T_B\) does, then \(\det(A) > \det(B)\). \\[0.75em]
+				\bubble & \bubble & If \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) forms a basis for a subspace, then 
+							      \(\{\vec{v}_1, \vec{v}_2 + \vec{v}_3, \vec{v}_1 + \vec{v}_3\}\) forms a basis for the same subspace.\\[0.75em]
+				\bubble & \bubble & Any two linearly independent vectors span \(\mathbb{R}^2.\) \\[0.75em]
+				\bubble & \bubble & If \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) is orthogonal set in \(\mathbb{R}^3\) and 
+							     \(W = \vspan\{\vec{v}_1, \vec{v}_3\}\), then \(W^\perp = \vspan\{2\vec{v}_2, \vec{v}_2\}\). \\[0.75em]
+				\bubble & \bubble & If \(\{\vec{v}_1, \vec{v}_2\}\) forms an orthonormal set, then \(\|\vec{v}_1 + \vec{v}_2\| = \sqrt{2}\). \\[0.75em]
+				\bubble & \bubble & If \(A \in \mathbb{R}^{2 \times 2}\) and \(A\) has a complex eigenvalue \(\lambda_1 = a + bi\), 
+							      then \(\lambda_1\lambda_2 = a^2 + b^2\). \\[0.75em]
+				\bubble & \bubble & If a vector \(\vec{y} \in \mathbb{R}^n\) is expressed as \(\vec{u} + \vec{v}\), where \(\vec{v} \cdot \vec{u} = 0\), 
+							      and \(\vec{u} \in \mathcal{W}\), then \(\vec{v}\) is \(\proj_\mathcal{W} \vec{y}\). \\[0.75em]
+				\bubble & \bubble & With \(A = A^T\), any two linearly independent eigenvectors \(\vec{v}_1, \vec{v}_2\) of \(A\) yield 
+							     \(\vec{v}_1 \cdot \vec{v}_2 = 0\).\\[0.75em]
+				\bubble & \bubble & If \(\vec{\hat{v}}, \vec{\hat{u}}\) are least-square solutions to the equation \(A\vec{x} = \vec{b},\) then 
+							      \(\vec{\hat{v}} - \vec{\hat{u}} \in \nullspace A\).\\[0.75em]
+				\bubble & \bubble & In \(LU\)-factorization of a square matrix \(A\), \(\det(A) = \det(U)\) and so the diagonal entries of \(U\) are the 
+							      eigenvalues of \(A\). \\[0.75em]
+				\bubble & \bubble & The \(PDP^{-1}\) factorization of a matrix \(A \in \mathbb{R}^{n \times n}\) is unique. \\[0.75em]
+				\bubble & \bubble & If \(\{\vec{a}_1, \dots, \vec{a}_k\}\) is a basis for a subspace, and 
+							      \(\{\vec{u}_1, \dots, \vec{u}_k\}\) is the result of the Gram-Schmidt process, then 
+							     \(\vspan \{\vec{a}_1, \dots, \vec{a}_k\} = \vspan\{\vec{u}_1, \dots, \vec{u}_k\}\). \\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+\section{\centering Possible/Impossible}
+	\begin{newquestion}
+		If a following statement \emph{might} be true, then place \textit{possible} as an answer. Otherwise, place \textit{impossible.}
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				possible & impossible & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) where the transformation is onto and the 
+							      columns of the standard matrix \(A\) are linearly independent. \\[0.75em]
+				\bubble & \bubble & A matrix \(A\) with the property that \(A^TA\) has negative eigenvalues. \\[0.75em]
+				\bubble & \bubble & An orthogonal matrix \(U \in \mathbb{R}^{n \times n}\) whose determinant is not 1. \\[0.75em]
+				\bubble & \bubble & A diagonalizable matrix \(A \in \mathbb{R}^{n \times n}\) with the sum of its eigenvalues' geometric multiplicities 
+							      being less than \(n\). \\[0.75em]
+				\bubble & \bubble & A regular stochastic matrix that has a column of zeroes. \\[0.75em]
+				\bubble & \bubble & A nonzero vector \(\vec{u}\) with \(\vec{u} \in \nullspace A\) and \(\vec{u} \in \colspace A^T\) for some real matrix 
+							     \(A\). \\[0.75em]
+				\bubble & \bubble & A real matrix \(A \in \mathbb{R}^{n \times n}\) that is row equivalent to the identity matrix and there exists vectors 
+							     \(\vec{x}, \vec{y} \in \mathbb{R}^n\) such that \(\vec{x} \ne \vec{y}\) and \(A\vec{x} = A\vec{y}\). \\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+\section{\centering Fill In the Blanks}
+\begin{newquestion}
+	Place the appropriate answer in the box provided.
+	\begin{enumerate}
+		\item If \(\det A^3B^2 = 4\) and \(B^TB = I\), find \(\det A\). \hfill \(\fbox{\(\phantom{\sqrt[3]{4}}\)}\)
+		\item If the basis of the nullspace of a \(6 \times 15\) matrix has 11 vectors, then what is the dimension of the column space of the matrix? 
+			\hfill \(\fbox{\(\phantom{4}\)}\)
+		\item What is the dimension of the subspace \(\mathcal{S}\) defined as \(\mathcal{S} = \{\vec{x} \in \mathbb{R}^4 \mid x_1 + x_2 = 0\}\)?
+			\hfill \(\fbox{\(\phantom{3}\)}\)
+		\item What is the maximum value of the quadratic form \(Q(\vec{x}) = 2x_1^2 - 5x_2^2 + 10x_3^2\) under the constraint that 
+			\(\vec{x} \cdot \vec{x} = 1\) and \(\vec{x} \cdot \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} = 0\). \hfill \(\fbox{\(\phantom{2}\)}\)
+		\item If \(W = \vspan \left\{\!\!\begin{pmatrix}1 \\ 2 \\ 1\end{pmatrix}, \begin{pmatrix}-2 \\ 1 \\ 0\end{pmatrix}\!\!\right\}\), what is a vector that
+			spans \(W^\perp\). \hfill \(\fbox{\(\phantom{\begin{pmatrix}-1 \\ -2 \\ 5\end{pmatrix}}\)}\)
+	\end{enumerate}
+\end{newquestion}
+
+\section{\centering Construction Questions}
+	\begin{newquestion}
+		For each question, provide an example that meets the specifications.
+		\begin{enumerate}
+			\item Find a \(2 \times 3\) matrix \(A\) with \(\nullspace A^T = \vspan \left\{\!\! \begin{pmatrix}1 \\ 2\end{pmatrix}\!\!\right\}\)
+			\item Find a matrix that is diagonalizable but not invertible.
+			\item Find a matrix \(A\) with \(\nullspace A = \vspan\left\{\!\!\begin{pmatrix}1 \\ 2 \\ 0\end{pmatrix}, \begin{pmatrix}1 \\ 0 \\ 1\end{pmatrix}\!\!\right\}\) and \(\rowspace A = \vspan\left\{\!\!\begin{pmatrix}-2 \\ 1 \\ 2\end{pmatrix}\!\!\right\}\) (Note that this vector was not chosen by coincidence.)
+			\item Construct a \(3 \times 3\) matrix with 2 distinct eigenvalues, \(\lambda_1 = 2\) and \(\lambda_2 = \lambda_3 = 1\). The second distinct
+			eigenvalue must have a geometric multiplicity of 1. Let the matrix \emph{not} be a diagonal matrix. 
+		\end{enumerate}
+	\end{newquestion}
+
+\section{\centering Short Answers}
+\begin{newquestion}
+	Answer the following questions.
+	\begin{enumerate}
+		\item Find the SVD of the matrix \(A = \begin{pmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{pmatrix}\). What is an orthonormal basis for \(\colspace A\)? 
+			\(\rowspace A\)? \(\nullspace A\)? What is the maximum value attained by \(\|A\vec{x}\|\) given the constraint \(\|\vec{x}\| = 1\)? What is 
+			the minimum? For what inputs are these extreme values attained?
+		\item Consider \(A = \begin{pmatrix}1 & 2 \\ 3 & 6\end{pmatrix}\) and \(\vec{b} = \begin{pmatrix}2 \\ 6\end{pmatrix}\). Plot the following.
+			\begin{enumerate}
+				\item A single solution to the equation \(A \vec{x} = \vec{b}\).
+				\item The whole solution set to the equation \(A \vec{x} = \vec{b}\).
+				\item A single solution to the equation \(A \vec{x} = \vec{0}\).
+				\item \(\nullspace A\).
+				\item \(\colspace A\).
+			\end{enumerate}
+	\end{enumerate}
+\end{newquestion}
+
+\newpage
+\input{solutions}
+\end{document}

@@ -1,0 +1,75 @@
+\documentclass{beamer}
+
+\usepackage{bm}
+\usepackage{tikz}
+
+\title{Echelon Forms and The Matrix Equation}
+\subtitle{And Other Things As Well}
+\author{Ahmed Mohammed}
+\date{PLUS Session, August 2023}
+\institute{Georgia Institute of Technology}
+
+
+\usetheme{Berlin}
+\usefonttheme{serif}
+\usecolortheme{seagull}
+
+\AtBeginSection[] {
+	\begin{frame}
+		\frametitle{Table of Contents}
+		\tableofcontents
+	\end{frame}
+}
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\vec}[1]{\bm{#1}}
+\begin{document}
+	\begin{frame}
+		\maketitle
+	\end{frame}
+	
+	\section{Introduction}
+	\begin{frame}
+		\frametitle{About Me}
+		\pause
+		Stand here please.
+		
+		\begin{figure}
+			\centering
+			\begin{tikzpicture}
+				\draw[->, semithick] (-1, 1) -- (1, -0.1);
+				%\draw[semithick] (-1, -1) -- (1, 1);
+			\end{tikzpicture}
+		\end{figure}
+	\end{frame}
+	
+	\section{Actual Session}
+	\subsection{Opening Activity}
+	\begin{frame}
+		\frametitle{Definitions \& Revision}
+		\begin{itemize}[<+(1)->]
+			\item What's a \(m \times n\) matrix?
+			\item What's a system of linear equations? How do they relate to matrices?
+			\item What's an echelon form of a matrix? What's a RREF of a matrix?
+			\item What's a pivot position?
+			\item What's a span of a set of vectors?
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Main Activity}
+	\begin{frame}
+		\frametitle{Exercises}
+		\centering
+		Look at the worksheet!
+	\end{frame}
+
+	\subsection{Closing Activity}
+	\begin{frame}
+		\frametitle{What's Next?}
+		Special case: \(A\vec{x} = \vec{0}\). \pause
+		\vspace{2.5mm}
+
+		What does this tell us about the columns of \(A\)? What does it tell us about \(A\vec{x} = \vec{b}\)?		
+	\end{frame}
+\end{document}
+

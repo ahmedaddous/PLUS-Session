@@ -76,6 +76,10 @@
 \newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
 % -------------------------------------------------------
 
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
 \begin{document}
 \maketitle
 
@@ -89,8 +93,8 @@
 			\specialrule{\lightrulewidth}{0.25em}{1.25em}
 			\bubble & \bubble & If a \(m \times n\) matrix \(A\) has \emph{no} zero entry, then the matrix has a pivot in every column. \\[0.75em]
 			\bubble & \bubble & A pivot in every row of an augmented matrix of a system of linear equation implies that the system is consistent.\\[0.75em]
-			\bubble & \bubble & If a \(2 \times 7\) coefficient matrix that corresponds to a system of linear equations has 2 pivots, then the system is 
-						     consistent. \\[0.75em]
+			\bubble & \bubble & If a \(2 \times 7\) coefficient matrix \(A\) that corresponds to the matrix equation \(A\vec{x} = \vec{b}\) has 2 pivots, 
+						     then the corresponding system is consistent for any \(\vec{b} \in \mathbb{R}^2\). \\[0.75em]
 			\bubble & \bubble & If a system of linear equations contains free variables, then there exists an infinite number of solutions. \\[0.75em]
 			\bubble & \bubble & The RREF of a matrix is unique. \\[0.75em]
 			\bubble & \bubble & If a row of an augmented matrix corresponding to a system of linear equations is 
@@ -200,7 +204,7 @@ linear combination:
 
 \begin{newactivity}
 	Find the value(s) of \(h\) such that \(\begin{bmatrix}1 \\ 4 \\ h\end{bmatrix}\) is in \(\vspan \left\{\!\begin{bmatrix}1 \\ 4 \\ -2\end{bmatrix}, 
-	\begin{bmatrix}-2 \\ -3 \\ 7\end{bmatrix}\!\right\}\).
+	\begin{bmatrix}-2 \\ -3 \\ 7\end{bmatrix}\!\right\}\). Write out the solution vector(s) to the consistent system(s) obtained when \(h\) is the right value(s).
 \end{newactivity}
 
 \section{\centering The Matrix Equation \(A\vec{x} = \vec{b}\) (1.4)}
@@ -227,4 +231,5 @@ columns  of \(A\)).
 	\end{enumerate}
 \end{newactivity}
 
+\include{solutions}
 \end{document}

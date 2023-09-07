@@ -1,0 +1,142 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Covering Section:} 1.7}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{A. M., Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Linear Independence (1.7)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section*{\centering Linear Independence (1.7)}
+\begin{mideea}{0.9}
+	\begin{enumerate}
+		\item \(A\vec{x} = \vec{0} \ \text{has a nontrivial solution} \ \iff \text{free variables} \iff \rule{3cm}{0.15mm}\) 
+
+		\item A set of vectors \(\{\vec{v}_1, \vec{v}_2, \dots, \vec{v}_p \mid \vec{v}_i \in \mathbb{R}^n\}\) is linearly independent if and only if 
+		\[c_1\vec{v}_1 + c_2\vec{v}_2 + \dots + c_p\vec{v}_p = \vec{0}, \ \text{with } c_i = 0, \text{for all} \ 1 \le i \le p\] is the only choice of scalars 
+		\(c_i\) satisfying the vector equation. Equivalently, a set of vectors is linearly dependent if and only if there exists a vector in the set that could be 
+		written as a linear combination of the other vectors.
+	\end{enumerate}
+\end{mideea}
+
+\subsection{Possible/Impossible Questions}
+\begin{newquestion}
+	Consider the following statements. If a statement is not possible in any scenario, mark it as \textit{impossible}. Otherwise, mark it as \textit{possible}.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.72\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) forms a linear independent set of vectors from \(\mathbb{R}^n\) but
+						      \(\{\vec{v}_1, \vec{v}_1 + \vec{v}_2, \vec{v}_3\}\) forms a linearly dependent set. \\[0.75em]
+			\bubble & \bubble & Two vectors \(\vec{v}_1, \vec{v}_2 \in \mathbb{R}^n\) form a linearly dependent set but one of the vectors
+						      is not in the span of the other vector.\\[0.75em]
+			\bubble & \bubble & A matrix \(A \in \mathbb{R}^{2\times3}\) where the columns of \(A\) form a linearly independent set.\\[0.75em]
+			\bubble & \bubble & A matrix \(A \in \mathbb{R}^{m \times n}\) whose columns form a linearly independent set, and there exists an infinite 
+						      number of solutions to the consistent system \(A\vec{x} = \vec{b}\) for some \(\vec{b} \in \mathbb{R}^m\).\\[0.75em]
+			\bubble & \bubble & A linearly independent set \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) where \(\{\vec{v}_1, \vec{v}_2\}\) forms a linearly
+						      dependent set.\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\subsection{Short Answers Questions}
+\begin{newquestion}
+	For each part, provide your work (or/)and answer. 
+	\begin{enumerate}
+		\item Find the value(s) of \(h\) where the set of vectors \(\left\{\begin{bmatrix}-2 \\ 6 \\ 1\end{bmatrix}, \begin{bmatrix}1 \\ h \\ 2\end{bmatrix}, \begin{bmatrix}7 \\ -3 \\ 4\end{bmatrix}\right\}\) becomes linearly dependent. 
+			After finding \(h\), what does this set span? (\textit{Choose only 1.})
+				\[
+				\begin{array}{c@{\hspace{7em}}c@{\hspace{7em}}c}
+					\bubble \ \text{A plane in} \ \mathbb{R}^3 & \bubble \ \mathbb{R}^2 & \bubble \ \text{All of} \ \mathbb{R}^3
+				\end{array}
+				\]
+		\item If, for every \(\vec{b} \in \mathbb{R}^m\), the equation \(A\vec{x} = \vec{b}\) has at most one solution, do the columns of \(A\) necessarily
+			form a linearly independent set? (Note that \(A \in \mathbb{R}^{m \times n}\).)
+		\item Given the matrix \(\begin{bmatrix}1 & 0 & -2 \\ 1 & 1 & -2 \\ 3 & 0 & -6\end{bmatrix}\), find a linear dependence relationship amongst the 
+			column vectors, and use that to form the vector equation that shows that the columns do not form a linearly independent set.
+	\end{enumerate}
+\end{newquestion}
+
+\newpage
+
+\input{solutions.tex}
+
+\end{document}

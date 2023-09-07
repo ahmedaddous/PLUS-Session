@@ -1,0 +1,144 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Covering Section:} 1.8}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{A. M., Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Linear Transformations (1.8)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section*{\centering Linear Transformations (1.8)}
+\subsection{T/F Questions}
+\begin{newquestion}
+	For each statement, mark the statement \emph{true} if it's \emph{always} true, or \emph{false} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & Every matrix transformation \(T \colon \mathbb{R}^n \to \mathbb{R}^m\) defined by \(T(\vec{x}) = A\vec{x}\) 
+						      is a linear transformation. \\[0.75em]
+			\bubble & \bubble & If \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) is a linearly dependent set of vectors from \(\mathbb{R}^n\), the set
+						      \(\{T(\vec{v}_1), \, T(\vec{v}_2), \, T(\vec{v}_3)\}\) is also linearly dependent for any linear transformation
+						      \(T \colon \mathbb{R}^n \to \mathbb{R}^m\).\\[0.75em]
+			\bubble & \bubble & If \(T_A \colon \mathbb{R}^m \to \mathbb{R}^n\), with \(T(\vec{x}) = A\vec{x}\) then
+						      \(A \in \mathbb{R}^{m \times n}\).\\[0.75em]
+			\bubble & \bubble & If \(T_A \colon \mathbb{R}^n \to \mathbb{R}^m\) with \(T(\vec{x}) = A\vec{x}\), then
+						      the span of the columns of \(A\) is the codomain of \(T_A\).\\[0.75em]
+			\bubble & \bubble & If \(T\) is a linear transformation from \(\mathbb{R}^n\) to \(\mathbb{R}^m\) and there exists more than one vector 
+						      \(\vec{v} \in \mathbb{R}^n\) such that \(T(\vec{v}) = \vec{b}\) for some  \(\vec{b} \in \mathbb{R}^m\), then there exists
+						      a nontrivial solution to the equation \(T(\vec{x}) = \vec{0}\).\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\subsection{Short Answer Questions}
+\begin{newquestion}
+	For each question, provide your work and answer.
+	\begin{enumerate}
+		\item The linear transformation \(T\) is defined by \(T(\vec{x}) = \begin{bmatrix}1 & 2 & 0 \\ 1 & 9 & 2\end{bmatrix}\vec{x}\).
+			\begin{enumerate}
+				\item What is the domain of the transformation?
+				\item What is the codomain of the transformation \(T\)?
+				\item What is the range of the transformation?
+			\end{enumerate}
+
+		\item Given the following information, construct the standard matrix \(A\) of the transformation defined by \(T(\vec{x}) = A\vec{x}\).
+			\[T\left(\begin{bmatrix}1 \\ 3\end{bmatrix}\right) = \begin{bmatrix}1 \\ 5 \\ 2\end{bmatrix}, \quad T\left(\begin{bmatrix}1 \\ 1\end{bmatrix}\right) = \begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\]
+			What is the domain of the transformation? What is the range?
+
+		\item Is it possible to construct a linear transformation \(T \colon \mathbb{R}^n \to \mathbb{R}^m\), where \(T(\vec{x}) = A\vec{x}\), and not all of 
+			the rows of \(A\) have pivots, yet for any vector \(\vec{b} \in \mathbb{R}^m\) there exists at least one vector \(\vec{v} \in \mathbb{R}^n\) 
+			such that \(T(\vec{v}) = \vec{b}\)?
+
+		\item Give a geometric description of what the linear transformation \(T\) does if its standard matrix is \[\begin{bmatrix}2 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0\end{bmatrix}.\]
+			What is the domain of \(T\)? What is its codomain? What is its range?
+
+		\item[\textit{Extra}] Notice that the previous standard matrix could be thought of as a sequence, or \emph{composition}, of two other linear 
+					      transformation. Write the standard matrix that describes each, and then see how they relate to the previous standard matrix.
+		
+		\item Provide a nontrivial solution to the equation \(T(\vec{x}) = \vec{0}\) given that for the linear transformation 
+			\(T \colon \mathbb{R}^3 \to \mathbb{R}^2\), \[T\left(\begin{bmatrix}1 \\ 4 \\ 1\end{bmatrix}\right) = T\left(\begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\right) \ne \vec{0}.\]
+	\end{enumerate}
+\end{newquestion}
+
+\include{solutions.tex}
+
+\end{document}

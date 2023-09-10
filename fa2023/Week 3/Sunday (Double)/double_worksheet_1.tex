@@ -1,0 +1,175 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+
+
+\title{\normalsize \textbf{Double} PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Exam 1 Review} \\ by \textit{Ahmed Mohammed}, \textit{Nora Butler}, \textit{Sri Palaniappan}}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{\textbf{Double 1}, Fall 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+%\fancyhead[C]{\textit{Linear Transformations (1.8)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section{\centering T/F Questions}
+\begin{newquestion}
+	For each statement, mark the statement \emph{true} if it's \emph{always} true, or \emph{false} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & Given the linear \(T \colon \mathbb{R}^n \to \mathbb{R}^m\) where \(m = n\) and \(T(\vec{x}) = \vec{b}\) has a 
+						      solution for every \(\vec{b} \in \mathbb{R}^m\), \(T\) is one-to-one. \\[0.75em]
+			\bubble & \bubble & If, for a given matrix \(A \in \mathbb{R}^{m \times n}\) and a set of vectors 
+						     \(\{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\) in 
+						     \(\mathbb{R}^m\), \(A\vec{x} = \vec{b}_i\) has a solution for any vector 
+						     \(\vec{b}_i \in \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), then the equation \(A\vec{x} = \vec{\tilde{b}}\), 
+						     where \(\vec{\tilde{b}} \in \vspan \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), has a solution.\\[0.75em]
+			\bubble & \bubble & If a matrix has a mixture of pivot and non-pivot columns, then the non-pivot columns can be expressed as a linear 
+						      combination of the pivot columns.\\[0.75em]
+			\bubble & \bubble & For any two matrices \(A, B \in \mathbb{R}^{n \times n}\), where \(A \ne B\), \(AB \ne BA\).\\[0.75em]
+			\bubble & \bubble & If the columns of a \(16 \times 42\) matrix \(A\) span all of \(\mathbb{R}^{16}\), then there exists 26 free variables in the
+						      equation \(A\vec{x} = \vec{b}\). \\[0.75em]
+			\bubble & \bubble & It is possible that a set of vectors \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) in \(\mathbb{R}^3\) form a linearly indpenendent
+						      set but not span all of \(\mathbb{R}^3\). \\[0.75em]
+			\bubble & \bubble & There exists a vector \(\vec{b} \in \mathbb{R}^2\) such that the solution set of the equation 
+						      \(\begin{bmatrix}1 & 3 & 0 \\ 0 & 0 & 1\end{bmatrix}\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix} = \vec{b}\) is the \(x_3\) axis. \\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Possible/Impossible Questions}
+\begin{newquestion}
+	Mark each statement as \textit{possible} if it could ever be true, or \textit{impossible} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & A linear transformation \(T \colon \mathbb{R}^2 \to \mathbb{R}^3\) that is one-to-one and its standard matrix has a pivot
+						      in every column. \\[0.7em]
+			\bubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) that is onto but not one-to-one. \\[0.7em]
+			\bubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) that is not onto and not one-to-one. \\[0.7em]
+			\bubble & \bubble & A linearly dependent set made up of two vectors, but one of them is not a scalar multiple of the other. \\[0.7em]
+			\bubble & \bubble & A matrix \(A\in \mathbb{R}^{m \times n}\) such that the equation \(A\vec{x} = \vec{b}\) has at least one solution for 
+						      an infinite number of vectors \(\vec{b}' \in \mathbb{R}^m\) and also no solutions for an infinte number of vectors 
+						      \(\vec{\tilde{b}} \in \mathbb{R}^m\).\\[0.7em]
+			\bubble & \bubble & A matrix \(A\in \mathbb{R}^{m \times n}\) with \(m < n\) and \(A\) has a pivot in every column.\\[0.7em]
+			\bubble & \bubble & A matrix \(A\) where the equation \(A\vec{x} = \vec{b}\) has multiple solutions but only the trivial solution is a solution to 
+						      the equation \(A\vec{x} = \vec{0}\).\\[0.7em]
+			\bubble & \bubble & A set of linearly independent vectors from \(\mathbb{R}^n\) \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) where 
+						      \(\vec{v}_3 \in \vspan\{\vec{v}_1, \vec{v}_2\}\). \\[0.7em]		
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Short Answer Questions}
+\begin{newquestion}
+	For each question, provide your work and answer.
+	\begin{enumerate}
+		\item Consider the linear transformation \(T_1\) defined by \(T_1(x) = (2x, 0, x)\), where the domain of \(T_1\) is \(\mathbb{R}\).
+			\begin{enumerate}
+				\item What is the codomain of the transformation?
+				\item What is the range of the transformation?
+			\end{enumerate}
+
+		\item Now consider the transformation \(T_2\) where \(T_2(x_1, x_2) = (2x_1, x_2, x_1 + 2x_2)\).
+			\begin{enumerate}
+				\item What is the standard matrix of the transformation?
+				\item Find a vector \(\vec{x}\) such that \(T_2(\vec{x}) = \vec{b}\) where \(\vec{b} = \begin{bmatrix}6 \\ -1 \\ 1\end{bmatrix}\).
+				\item Is \(T_2\) one-to-one? Is it onto?
+			\end{enumerate}
+
+		\item Construct a matrix \(A \in \mathbb{R}^{3 \times 4}\) where \(\begin{bmatrix}1 \\ -2 \\ 1 \\ 0\end{bmatrix}\) and 
+			\(\begin{bmatrix}1 \\ 0 \\ 0 \\ 3\end{bmatrix}\) are nontrivial solutions to the equation \(A\vec{x} = \vec{0}\). 
+			
+		\item Construct two augmented matrices \(\begin{bmatrix}A & | & \vec{b}\end{bmatrix}\) and \(\begin{bmatrix}C & | & \vec{d}\end{bmatrix}\)
+			in RREF such that \(A \in \mathbb{R}^{3 \times 3}\) and \(C \in \mathbb{R}^{4 \times 3}\) and the solution corresponding to both systems has
+			\(\vec{x} = \begin{bmatrix}1 \\ 1 \\ 2\end{bmatrix}\) as the only solution.
+
+		\item Find the standard matrix of the transformation that rotates every vector in \(\mathbb{R}^2\) by an angle of \(\pi/2\) radians clockwise  
+			and reflects everything across the line defined by \(x_1 = x_2\).
+		
+		\item Provide a nontrivial solution to the equation \(T(\vec{x}) = \vec{0}\) given that for the linear transformation 
+			\(T \colon \mathbb{R}^3 \to \mathbb{R}^2\), \[T\left(\begin{bmatrix}1 \\ 4 \\ 1\end{bmatrix}\right) = T\left(\begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\right) \ne \vec{0}.\]
+	\end{enumerate}
+\end{newquestion}
+
+\include{solutions.tex}
+
+\end{document}

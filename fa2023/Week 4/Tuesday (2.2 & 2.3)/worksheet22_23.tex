@@ -1,0 +1,140 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Covering Sections:} 2.2 \& 2.3}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{A. M., Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Inverses (2.2 \& 2.3)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section{\centering T/F Questions}
+\begin{newquestion}
+	For each statement, mark the statement \emph{true} if it's \emph{always} true, or \emph{false} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & If \(A\) is an \(n\times n\) matrix and \(AB = I_n\) for some \(n \times n\) matrix \(B\), then \(A\) is invertible. \\[0.75em]
+			\bubble & \bubble & If \(B\) is row equivalent to an invertible \(n \times n\) matrix \(A\), then \(B\) is invertible.\\[0.75em]
+			\bubble & \bubble & If \(A\) is an invertible \(n \times n\) matrix, then for square matrices \(B, C\), \(AB = AC\) implies \(B = C\).\\[0.75em]
+			\bubble & \bubble & If the columns of a \(n \times n\) matrix \(A\) span \(\mathbb{R}^n\), then \(A\vec{x} = \vec{0}\) only has the trivial
+						      solution.\\[0.75em]
+			\bubble & \bubble & If an \(n \times n\) matrix \(A\) has the property that for any vectors \(\vec{x}, \vec{y} \in \mathbb{R}^n\) that are not the
+						      same, \(A\vec{x} \ne A\vec{y}\), then the matrix is invertible.\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Short Answer Questions}
+\begin{newquestion}
+	Answer each part so that you may be able to come up with an answer for the following question.
+	\begin{enumerate}
+		\item Is the statement \[\text{``For any matrix} \ A,B,C \in \mathbb{R}^{n \times n}, \ \text{if} \ AB = CA = I_n \ \text{then} \ B = C,"\] always true?
+			\begin{enumerate}
+				\item Note that \(AB = I_n\). How might you be able to use the information provided to get to \(B = C\)? (You can also start from 
+					\(CA = I_n\) and reach \(B = C\) as well.)
+				\item What does this hint to us about the of inverses of a square matrix?
+			\end{enumerate}
+
+		\item How does the standard matrix of the inverse of a linear transformation from \(\mathbb{R}^n\) to \(\mathbb{R}^n\) look like?
+			\begin{enumerate}
+				\item What is the standard matrix of the transformation that rotates every vector in \(\mathbb{R}^3\) counterclockwise by \(\pi/2\) radians
+					around the \(x_1\)-axis?
+				\item Keeping in mind what it means to be the inverse of a transformation, what would the standard matrix of the inverse of the above
+					transformation be?
+			\end{enumerate}
+
+		\item How do elementary matrices relate to inverses of matrices?
+			\begin{enumerate}
+				\item Consider the matrix \[A = \begin{bmatrix}1 & 0 & -6 \\ 1 & 1 & -6 \\ 1 & 1 & -5\end{bmatrix}.\] Here is the row-reduction process:
+					\[\begin{bmatrix}1 & 0 & -6 \\ 1 & 1 & -6 \\ 1 & 1 & -5\end{bmatrix} \stackrel{E_1}{\sim} \begin{bmatrix}1 & 0 & -6 \\ 1 & 1 & -6 \\ 0 & 0 & 1\end{bmatrix} \stackrel{E_2}{\sim} \begin{bmatrix}1 & 0 & -6 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix} \stackrel{E_3}{\sim} \begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}.\] Find  the elementary matrices \(E_1, E_2, E_3\), and then take their products. Then, find \((E_3E_2E_1)A\).
+
+				\item Now, what can you say about the connection between compositions of elementary matrices and inverses of invertible matrices?
+			\end{enumerate}
+		
+		\item[\textit{Extra}] If \(A = CB\), with \(C\) being invertible and \(A, B, C \in \mathbb{R}^{n \times n}\), explain how \(A\) and \(B\) are 
+					     row-equivalent.
+	\end{enumerate}
+\end{newquestion}
+
+\include{solutions.tex}
+
+\end{document}

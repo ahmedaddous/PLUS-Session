@@ -93,11 +93,11 @@
 			\specialrule{\lightrulewidth}{0.25em}{1.25em}
 			\bubble & \bubble & Given the linear \(T \colon \mathbb{R}^n \to \mathbb{R}^m\) where \(m = n\) and \(T(\vec{x}) = \vec{b}\) has a 
 						      solution for every \(\vec{b} \in \mathbb{R}^m\), \(T\) is one-to-one. \\[0.75em]
-			\bubble & \bubble & If, for a given matrix \(A \in \mathbb{R}^{m \times n}\) and a set of vectors 
-						     \(\{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\) in 
-						     \(\mathbb{R}^m\), \(A\vec{x} = \vec{b}_i\) has a solution for any vector 
-						     \(\vec{b}_i \in \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), then the equation \(A\vec{x} = \vec{\tilde{b}}\), 
-						     where \(\vec{\tilde{b}} \in \vspan \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), has a solution.\\[0.75em]
+			\bubble & \bubble & If \(A \in \mathbb{R}^{m \times n}\) and 
+						     \(\{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\) 
+						     is the set of vectors from \(\mathbb{R}^m\) such that for any vector \(\vec{b}_i\) in the set, \(A\vec{x} = \vec{b}_i\) has a
+						     solution, then \(A\vec{x} = \vec{\tilde{b}}\), where 
+						     \(\vec{\tilde{b}} \in \vspan \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), also has a solution.\\[0.75em]
 			\bubble & \bubble & If a matrix has a mixture of pivot and non-pivot columns, then the non-pivot columns can be expressed as a linear 
 						      combination of the pivot columns.\\[0.75em]
 			\bubble & \bubble & For any two matrices \(A, B \in \mathbb{R}^{n \times n}\), where \(A \ne B\), \(AB \ne BA\).\\[0.75em]
@@ -126,8 +126,8 @@
 			\bubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) that is not onto and not one-to-one. \\[0.7em]
 			\bubble & \bubble & A linearly dependent set made up of two vectors, but one of them is not a scalar multiple of the other. \\[0.7em]
 			\bubble & \bubble & A matrix \(A\in \mathbb{R}^{m \times n}\) such that the equation \(A\vec{x} = \vec{b}\) has at least one solution for 
-						      an infinite number of vectors \(\vec{b}' \in \mathbb{R}^m\) and also no solutions for an infinte number of vectors 
-						      \(\vec{\tilde{b}} \in \mathbb{R}^m\).\\[0.7em]
+						      an infinite number of vectors \(\vec{b} \in \mathbb{R}^m\) and also the equation \(A\vec{x} = \vec{d}\) has 
+						      no solutions for an infinte number of vectors \(\vec{d} \in \mathbb{R}^m\).\\[0.7em]
 			\bubble & \bubble & A matrix \(A\in \mathbb{R}^{m \times n}\) with \(m < n\) and \(A\) has a pivot in every column.\\[0.7em]
 			\bubble & \bubble & A matrix \(A\) where the equation \(A\vec{x} = \vec{b}\) has multiple solutions but only the trivial solution is a solution to 
 						      the equation \(A\vec{x} = \vec{0}\).\\[0.7em]
@@ -156,7 +156,8 @@
 			\end{enumerate}
 
 		\item Construct a matrix \(A \in \mathbb{R}^{3 \times 4}\) where \(\begin{bmatrix}1 \\ -2 \\ 1 \\ 0\end{bmatrix}\) and 
-			\(\begin{bmatrix}1 \\ 0 \\ 0 \\ 3\end{bmatrix}\) are nontrivial solutions to the equation \(A\vec{x} = \vec{0}\). 
+			\(\begin{bmatrix}1 \\ 0 \\ 0 \\ 3\end{bmatrix}\) are nontrivial solutions to the equation \(A\vec{x} = \vec{0}\). (\textit{Note:} \(A\) cannot be 
+			the zero matrix.)
 			
 		\item Construct two augmented matrices \(\begin{bmatrix}A & | & \vec{b}\end{bmatrix}\) and \(\begin{bmatrix}C & | & \vec{d}\end{bmatrix}\)
 			in RREF such that \(A \in \mathbb{R}^{3 \times 3}\) and \(C \in \mathbb{R}^{4 \times 3}\) and the solution corresponding to both systems has

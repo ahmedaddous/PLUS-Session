@@ -1,0 +1,46 @@
+\fancyhead[C]{\textit{Solutions}}
+
+\section{\centering Solutions}
+\subsection{Solutions to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & If \(A\) is an \(n\times n\) matrix and \(AB = I_n\) for some \(n \times n\) matrix \(B\), then \(A\) is invertible. \\[0.75em]
+			\dbubble & \bubble & If \(B\) is row equivalent to an invertible \(n \times n\) matrix \(A\), then \(B\) is invertible.\\[0.75em]
+			\dbubble & \bubble & If \(A\) is an invertible \(n \times n\) matrix, then for square matrices \(B, C\), \(AB = AC\) implies \(B = C\).\\[0.75em]
+			\dbubble & \bubble & If the columns of a \(3 \times 3\) matrix \(A\) span \(\mathbb{R}^n\), then \(A\vec{x} = \vec{0}\) only has the trivial
+						       solution.\\[0.75em]
+			\dbubble & \bubble & If an \(n \times n\) matrix \(A\) has the property that for any vectors \(\vec{x}, \vec{y} \in \mathbb{R}^n\) that are not the
+						      same, \(A\vec{x} \ne A\vec{y}\), then the matrix is invertible.\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solutions to Short Answer Questions}
+\begin{enumerate}
+	\item The statement is true!
+		\begin{enumerate}
+			\item Since \(AB = I_n\), \(CAB = CI_n = C\). We know that \(CA = I_n\), so the equation \(CAB = CI_n\) reduces to \(B = C\). If you started off
+				with \(CA = I_n\), then you can follow a similar argument to show that \(B = C\) as well.
+			\item This tells you that the left and right inverses for square matrices are the same. The question from the \textbf{T/F} section also hints to the fact
+				that inverse of the matrix is unique.
+		\end{enumerate}
+	\item If \(T \colon \mathbb{R}^n \to \mathbb{R}^n\) is defined using the matrix \(T(\vec{x}) = A\vec{x}\), where \(A \in \mathbb{R}^{n \times n}\) is an 
+		invertible matrix, then the inverse of \(T\), \(T^{-1}\), is defined by \(T^{-1}(\vec{x}) = A^{-1}\vec{x}\).
+		\begin{enumerate}
+			\item It is \[\begin{bmatrix}1 & 0 & 0\\ 0 & 0 & -1\\ 0 & 1 & 0\end{bmatrix}.\]
+			\item The standard matrix of the inverse would then be \(\begin{bmatrix}1 & 0 & 0\\ 0 & 0 & -1\\ 0 & 1 & 0\end{bmatrix}^{-1}\). Geometrically,
+				this standard matrix should rotate vectors in \(\mathbb{R}^3\) by \(\pi/2\) radians \emph{clockwise} around the \(x_1\)-axis. The matrix that
+				does this is \[\begin{bmatrix}1 & 0 & 0\\ 0 & 0 & 1\\ 0 & -1 & 0\end{bmatrix}.\]
+		\end{enumerate}
+	\item The product of a sequence of \(n \times n\) elementary matrices defines an inverse for some matrix \(A \in \mathbb{R}^{n \times n}\).
+		\begin{enumerate}
+			\item \[E_1 = \begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -1 & 1\end{bmatrix}, \quad E_2 = \begin{bmatrix}1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}, \quad E_3 = \begin{bmatrix}1 & 0 & 6 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}.\] \[E_3E_2E_1 = \begin{bmatrix}1 & -6 & 6 \\ -1 & 1 & 0 \\ 0 & -1 & 1\end{bmatrix},\quad (E_3E_2E_1)A = I_3.\]
+			\item We see that \(E_3E_2E_1 A = I_n \implies (E_3E_2E_1) I = A^{-1}\). The elemntary matrices that reduce \(A\) to the identity matrix are the 
+				same to those that reduce \(I_3\) to \(A^{-1}\).
+		\end{enumerate}
+	\item[\textit{Extra}] If \(C\) is invertible, then it is a product of elementary matrices, so we're applying row operations on \(B\) to get \(A\). Hence, \(A\) is row
+				     equivalent to \(B\).
+\end{enumerate}

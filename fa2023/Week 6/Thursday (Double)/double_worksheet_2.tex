@@ -1,0 +1,220 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{nicematrix}
+
+\title{\normalsize \textbf{Double} PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Exam 2 Review} \\ by \textit{Ahmed Mohammed}, \textit{Nora Butler}, \textit{Sri Palaniappan}}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{\textbf{Double 2}, Fall 2023}
+\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+%\fancyhead[C]{\textit{Linear Transformations (1.8)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section{\centering T/F Questions}
+\begin{newquestion}
+	For each statement, mark the statement \emph{true} if it's \emph{always} true, or \emph{false} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & If \(\lambda = 0\) is not an eigenvalue of a matrix, then the nullspace of that matrix is empty. \\[2em]
+			\bubble & \bubble & Every regular stochastic matrix has \(\lambda = 1\) as an eigenvalue.\\[1em]
+			\bubble & \bubble & If a matrix \(A\) can be row reduced to the identity matrix, it must be invertible.\\[1em]
+			\bubble & \bubble & If two square matrices \(A, B\) share an eigenvector \(\vec{v}\), where \(A\vec{v} = 2\vec{v}\) and \(B\vec{v} = \vec{v}\),
+						      then \(\lambda = 5\) is an eigenvalue of the matrix \(2A + B\).\\[2em]
+			\bubble & \bubble & If \(B\) is an echelon form of a matrix \(A\), then the pivot columns of \(B\) form a basis for \(\colspace A\). \\[2em]
+			\bubble & \bubble & If \(A, B \in \mathbb{R}^{n\times n}\) with \(\det A = 1\) and \(\det B = -1\), then \(AB\) is invertible.\\[1em]
+			\bubble & \bubble & If \(A\) and \(B\) are invertible \(n \times n\) matrices, then \(AB = BA\). \\[1em]
+			\bubble & \bubble & If for all pair of vectors \(\vec{x}, \vec{y} \in \mathbb{R}^n\), \(A\vec{x} \ne A \vec{y}\), then 
+						     \(\nullspace A \ne \{\vec{0}\}\). \\[1em]
+			\bubble & \bubble & The \(LU\) factorization for a given matrix is unique.\\[1em]
+			\bubble & \bubble & For any square matrix and any scalar \(c\), \(\det(cA) = c\det(A)\) \\[1em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Possible/Impossible Questions}
+\begin{newquestion}
+	Mark each statement as \textit{possible} if it could ever be true/possible, or \textit{impossible} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & A non-invertible matrix A with a nonzero eigenvalue. \\[1em]
+			\bubble & \bubble & A matrix \(A\) that is both an upper triangular and lower trangular matrix. \\[1em]
+			\bubble & \bubble & \(A\) is a \(5 \times 3\) matrix with \(\rank A = 2 \cdot \dim(\nullspace(A))\).\\[1em]
+			\bubble & \bubble & Eigenvectors \(\vec{v}_1\) and \(\vec{v}_2\) of \(A\) that are scalar multiple of each other, but are from different
+						      eigenspaces. \\[2em]
+			\bubble & \bubble & An \(n \times n\) matrix \(A\) that is both invertible and has \(\dim(\nullspace(A)) = 1\). \\[1em]
+			\bubble & \bubble & \(A\) is a non-zero matrix whose columns don't form a basis for \(\colspace A\). \\[1em]
+			\bubble & \bubble & \(A \in \mathbb{R}^{3 \times 3}\) and \(A\) has only 2 distinct eigenvalues.\\[1em]
+			\bubble & \bubble & \(A \in \mathbb{R}^{3 \times 2}\) and \(\colspace A = \mathbb{R}^3\).\\[1em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Short/Long Answer Questions}
+\begin{newquestion}
+	For each question, provide your work and answer.
+	\begin{enumerate}
+		\item Suppose \(A, C\), and \(D\) are invertible \(n \times n\) invertible matrices. Find the inverse of the partitioned matrix 
+			\[\begin{pmatrix}A & 0 \\ C & D\end{pmatrix}.\] 
+
+		\item Find the \(LU\) factorization of \(A\), where \(A=\begin{bmatrix}1 & 2 & 2 \\ 4 & 4 & 2 \\ 4 & 6 & 4\end{bmatrix}.\) In doing so, fill in the missing
+			blanks below. \[L = \begin{pmatrix}1 & 0 & 0 \\ & 1 & 0 \\ & & 1\end{pmatrix} \qquad U = \begin{pmatrix}& & \\ 0  & & \\ 0 & 0 & \end{pmatrix}.\]
+		\item Compute \(A^{-1}\), where \(A = \begin{pmatrix}0 & 1 & 2 \\ 1 & 2 & 3 \\ 3 & 1 & 1\end{pmatrix}\).
+		\item Solve for \(\vec{x}\) in \(A\vec{x} = LU\vec{x} = \vec{v}\), given \(L = \begin{pmatrix}1 & 0 & 0 \\ 3 &  1 & 0 \\ 1 & 3/2 & 1\end{pmatrix}\), 
+			\(U = \begin{pmatrix}1 & 1 & 1\\ 0 & -2 & -6 \\ 0 & 0 &3\end{pmatrix}\), and \(\vec{v} = \begin{pmatrix}1 \\ 5 \\ 10\end{pmatrix}\).
+		\item Find \(\begin{vmatrix}0 & x & 0 & y \\ -3 & 1  & 3 & 2 \\ 9p & 9q & 0 & 9 \\ 2 & 2 & 0 & 2\end{vmatrix}\) given that 
+			\(\begin{vmatrix}0 & x & y \\ 1 & 1 & 1 \\ p & q & 1\end{vmatrix} = 6.\)
+		\item You're given that \(\det(A^2B^4) = 16\) and \(\det(A) = 2\). If \(A, B \in \mathbb{R}^{3 \times 3}\), and \(C = 2AB\), what is \(\det(C)\)?
+		\item Let \(\mathcal{C} = \left\{\!\left.\begin{pmatrix}a \\ a + b \\ b\end{pmatrix} \;\right|\; a, b \in \mathbb{R}\!\right\}\). Is \(\mathcal{C}\) a
+			subpace? If so, what's its dimension?
+		\item What's the dimension of \(\mathcal{Q}\) if \(\mathcal{Q} = \{\vec{x} \in \mathbb{R}^3 \mid x_1 = -x_2\}\)?
+		\item Given \(A = \begin{pmatrix}1 & -3 \\ -3 & 9\end{pmatrix}\) and \(\vec{b} = \begin{pmatrix}3 \\ -9\end{pmatrix}\), sketch the nullspace of 
+			\(A\), \(\colspace A\) and the set of solutions for \(A\vec{x} = \vec{b}\).
+		\begin{figure}[!h]
+			\centering
+			\begin{minipage}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}
+					\begin{axis}[axis lines = center, width=\textwidth, height=\textwidth, xmin=-5, xmax=5, ymin=-5, ymax=5, grid=major, xtick distance = 1, ytick distance = 1, xticklabel = \empty, yticklabel = \empty]
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Sketch \(\nullspace A\).}
+			\end{minipage}\hfill
+			\begin{minipage}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}
+					\begin{axis}[axis lines = center, width=\textwidth, height=\textwidth, xmin=-5, xmax=5, ymin=-5, ymax=5, grid=major, xtick distance = 1, ytick distance = 1, xticklabel = \empty, yticklabel = \empty]
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Sketch \(\colspace A\).}
+			\end{minipage}\hfill
+			\begin{minipage}{0.33\textwidth}
+				\centering
+				\begin{tikzpicture}
+					\begin{axis}[axis lines = center, width=\textwidth, height=\textwidth, xmin=-5, xmax=5, ymin=-5, ymax=5, grid=major, xtick distance = 1, ytick distance = 1, xticklabel = \empty, yticklabel = \empty]
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Sketch solutions to \(A\vec{x} = \vec{b}\).}
+			\end{minipage}
+		\end{figure}
+		\item Given \(A = \begin{pmatrix}1 & -3 & -4 \\ -4 & 6 & 2 \\ -3 & 7 & 6\end{pmatrix}\) and \(\vec{u} = \begin{pmatrix}3 \\ 3 \\ -4\end{pmatrix}\).
+			\begin{enumerate}
+				\item Is \(\vec{u}\) in \(\nullspace A\)?
+				\item Is \(\vec{u}\) in \(\colspace A\)?
+				\item Construct the basis for \(\colspace A\).
+			\end{enumerate}
+		
+		\item Find the value \(k\) such that the following matrix has only 1 distinct eigenvalue with algebraic multiplicity of 2. 
+			\[\begin{pmatrix}0 & k \\ 2 & -4\end{pmatrix}\]
+		
+		\item Consider the following diagram representing a Markov Chain, find the corresponding stochastic matrix \(P\), then find the long-term trend of the 
+	            	chain.
+	            \begin{figure}[!h]
+			\centering
+			\begin{tikzpicture}[thin, node distance=43mm, main/.style = {draw, circle, minimum size=1cm}, lbl/.style={midway, fill=white, font=\small}]
+				\node[main] (A) {\(A\)};
+				\node[main] (B) [below right of=A] {\(B\)};
+				\draw[bend left=20, ->] (A) to node[lbl] {0.5} (B);
+				\draw[bend left=20, ->] (B) to node[lbl] {0.25} (A);
+	
+				\node[main] (C) [below left of= A] {\(C\)};
+				\draw[bend right=20, ->] (A) to node[lbl] {0} (C);
+				\draw[bend right=20, ->] (C) to node[lbl] {0.2} (A);
+	
+				\draw[->] (B) to node[lbl] {\small 0.25} (C);
+				\draw[bend right=20, ->] (C) to node[lbl] {0.5} (B);
+	
+				\draw[->] (A) to [out=60, in=120, looseness=4.5] node[lbl] {0.5} (A);
+				\draw[->] (B) to [out=30, in=330, looseness=4.5] node[lbl] {0.5} (B);
+				\draw[->] (C) to [out=150, in=210, looseness=4.5] node[lbl]{0.3} (C);
+			\end{tikzpicture}
+		    \end{figure}
+
+			What is \(\det(P - I)\)?
+	\end{enumerate}
+\end{newquestion}
+
+\include{solutions}
+
+\end{document}

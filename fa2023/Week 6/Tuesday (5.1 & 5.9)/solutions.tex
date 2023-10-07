@@ -1,0 +1,51 @@
+\section{\centering Solutions}
+
+\subsection{Solutions to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & Every stochastic matrix has a steady state vector. \\[0.75em]
+			\bubble & \dbubble & Only regular stochastic matrices have a unique probability steady state vector.\\[0.75em]
+			\bubble & \dbubble & The set of probability vectors in \(\mathbb{R}^3\) forms a subspace.\\[0.75em]
+			\dbubble & \bubble & Given two probability vectors \(\vec{x}, \vec{y} \in \mathbb{R}^3\), the vector \(2/3\vec{x} + 1/3\vec{y}\) is a probability 
+						      vector as well.\\[0.75em]
+			\dbubble & \bubble & If \(P\) is a \(n \times n\) stochastic matrix, and \(\vec{x}_0 \in \mathbb{R}^n\) is a probabilty vector, then
+						      \(\vec{x}_{k} = P^k\vec{x}_0\) is the probabilty vector that denotes the likelyhood that we're in a specific
+						      state after applying \(P\) for \(k\) number of times after we've started off from \(\vec{x}_0\).\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solutions to Short Answer Questions}
+	\begin{enumerate}
+		\item There are actually multiple valid answers for this question. So, please note the states the columns correspond to.
+			\NiceMatrixOptions{
+				code-for-first-row=\color{teal},
+				code-for-first-col=\color{purple},
+			}
+			\[
+				\begin{bNiceMatrix}[first-row,first-col]
+				   	&   A   &   B   &    C   \\
+				     A & 0.5  & 0.25 & 0.2 \\
+				     B & 0.5  &  0.5  & 0.5 \\
+				     C &  0   &  0.25 & 0.3
+				\end{bNiceMatrix}
+			\]
+			The states in teal denote the {\color{teal} from}, and the states in purple denote the states that {\color{purple} receive}.
+		\item Finding the ``long-term trend" of the chain corresponds to finding the steady-state vector. 
+			\begin{align*}
+				\begin{bmatrix}0.5 & 0.25 & 0.2 \\ 0.5 & 0.5 & 0.5 \\ 0 & 0.25 & 0.3\end{bmatrix} - I_3 &= 
+				\begin{bmatrix}-0.5 & 0.25 & 0.2 \\ 0.5 & -0.5 & 0.5 \\ 0 & 0.25 & -0.7\end{bmatrix} 
+				\sim \begin{bmatrix}0.5 & -0.5 & 0.5 \\ 0 & -0.25 & 0.7 \\ 0 & 0.25 & -0.7\end{bmatrix} \\[0.5em]
+				&\sim \begin{bmatrix}1 & -1 & 1 \\ 0 & 1 & - 14/5 \\ 0 & 0 & 0\end{bmatrix} 
+				\sim \begin{bmatrix}1 & 0 & 1 - 14/5 \\ 0 & 1 & -14/5 \\ 0 & 0 & 0\end{bmatrix}
+			\end{align*}
+			From here we see that \(\vec{x} = t\begin{bmatrix}9/5 \\ 14/5 \\ 1\end{bmatrix}.\) However, the sum of the entries should add up to one, and
+			so \(\vec{q} = \displaystyle \frac{5}{28}\begin{bmatrix}9/5 \\ 14/5 \\ 1\end{bmatrix}.\)
+		
+			You can verify that this is the steady-state vector by left-nultiplying it with the matrix.
+		
+		\item It's always 0.
+	\end{enumerate}

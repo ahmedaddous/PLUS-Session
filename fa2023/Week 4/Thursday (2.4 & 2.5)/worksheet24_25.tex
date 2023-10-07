@@ -1,0 +1,127 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+%\usepackage{tikz}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{pgfplots}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{\textit{Covering Sections:} 2.4 \& 2.5}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{A. M., Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Partition Matrices and  \(LU\) Factorization (2.2 \& 2.3)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up question environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section{\centering T/F Questions}
+\begin{newquestion}
+	For each statement, mark the statement \emph{true} if it's \emph{always} true, or \emph{false} otherwise.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \bubble & If \(A\) is a \(n \times n\) matrix and \(A = LU\) is the \(LU\)-factorization of \(A\), then \(A\) is invertible if and only if \(U\) 
+						      is.\\[0.75em]
+			\bubble & \bubble & If \(A \in \mathbb{R}^{m \times n}\) and \(A = LU\) is its \(LU\)-factorization, then \(L \in \mathbb{R}^{n \times n}\) and
+						      \(U \in \mathbb{R}^{m \times n}\).\\[0.75em]
+			\bubble & \bubble & Every matrix has an \(LU\)-factorization.\\[0.75em]
+			\bubble & \bubble & Every \emph{invertible} matrix has an \(LU\)-factorization.\\[0.75em]
+			\bubble & \bubble & Given the matrices \(A, B, C\) and \(P = \begin{bmatrix}A & B \\ 0 & C\end{bmatrix}\) where \(P\) is \(p \times 5\) and 
+						      \(A\) is \(n \times 3\), \(C\) is \(B\) is \((p-n) \times 2\).\\[0.75em]
+			\bubble & \bubble & To get the \(LU\) factorization of any matrix \(A\), you must reduce \(A\) to RREF to get \(U\).\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{newquestion}
+
+\section{\centering Short Answer Questions}
+\begin{newquestion}
+	Answer the following questions.
+	\begin{enumerate}
+		\item Find the \(LU\) factorization of the matrix \(\begin{bmatrix}1 & 0 & -6 \\ 1 & 1 & -6 \\ 1 & 1 & -5\end{bmatrix}.\)
+
+			\hfill \(L =  \fbox{\phantom{\(\begin{bmatrix}1 & 0 & -6 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}\)}}\)
+
+			\hfill \(U = \fbox{\phantom{\(\begin{bmatrix}1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & -1 & 1\end{bmatrix}\)}}\)
+
+		\item Use the \(LU\)-factorization obtained above to find a solution to the equation \(A\vec{x} = \begin{bmatrix}1 \\ 0 \\ 2\end{bmatrix}\).
+		
+		\item Given \(B, C, I_n \in \mathbb{R}^{n \times n}\) are all invertible and \(A = \begin{bmatrix}B & I_n \\ 0 & C\end{bmatrix}\), find \(X, Y, W, Z\)
+			in terms of \(B, C,\) such that \(A^{-1} = \begin{bmatrix}X & Y \\ W & Z\end{bmatrix}\).
+	\end{enumerate}
+\end{newquestion}
+
+\include{solutions.tex}
+
+\end{document}

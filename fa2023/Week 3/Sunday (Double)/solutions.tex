@@ -1,0 +1,72 @@
+\section{Solutions}
+\subsection{Solutions to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & Given the linear \(T \colon \mathbb{R}^n \to \mathbb{R}^m\) where \(m = n\) and \(T(\vec{x}) = \vec{b}\) has a 
+						      solution for every \(\vec{b} \in \mathbb{R}^m\), \(T\) is one-to-one. \\[0.75em]
+			\dbubble & \bubble & If \(A \in \mathbb{R}^{m \times n}\) and 
+						     \(\{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\) 
+						     is the set of vectors from \(\mathbb{R}^m\) such that for any vector \(\vec{b}_i\) in the set, \(A\vec{x} = \vec{b}_i\) has a
+						     solution, then \(A\vec{x} = \vec{\tilde{b}}\), where 
+						     \(\vec{\tilde{b}} \in \vspan \{\vec{b}_1, \vec{b}_2, \vec{b}_3, \dots, \vec{b}_p\}\), also has a solution.\\[0.75em]
+			\dbubble & \bubble &If a matrix has a mixture of pivot and non-pivot columns, then the non-pivot columns can be expressed as a linear 
+						      combination of the pivot columns.\\[0.75em]
+			\bubble & \dbubble & For any two matrices \(A, B \in \mathbb{R}^{n \times n}\), where \(A \ne B\), \(AB \ne BA\).\\[0.75em]
+			\dbubble & \bubble & If the columns of a \(16 \times 42\) matrix \(A\) span all of \(\mathbb{R}^{16}\), then there exists 26 free variables in the
+						      equation \(A\vec{x} = \vec{b}\). \\[0.75em]
+			\bubble & \dbubble & It is possible that a set of vectors \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) in \(\mathbb{R}^3\) form a linearly indpenendent
+						      set but not span all of \(\mathbb{R}^3\). \\[0.75em]
+			\bubble & \dbubble & There exists a vector \(\vec{b} \in \mathbb{R}^2\) such that the solution set of the equation 
+						      \(\begin{bmatrix}1 & 3 & 0 \\ 0 & 0 & 1\end{bmatrix}\begin{bmatrix}x_1 \\ x_2 \\ x_3\end{bmatrix} = \vec{b}\) is the \(x_3\) axis. \\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solutions to Possible/Impossible Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & A linear transformation \(T \colon \mathbb{R}^2 \to \mathbb{R}^3\) that is one-to-one and its standard matrix has a pivot
+						      in every column. \\[0.75em]
+			\dbubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) that is onto but not one-to-one. \\[0.75em]
+			\dbubble & \bubble & A linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) that is not onto and not one-to-one. \\[0.75em]
+			\dbubble & \bubble & A linearly dependent set made up of two vectors, but one of them is not a scalar multiple of the other. \\[0.75em]
+			\dbubble & \bubble & A matrix \(A\in \mathbb{R}^{m \times n}\) such that the equation \(A\vec{x} = \vec{b}\) has at least one solution for 
+						      an infinite number of vectors \(\vec{b} \in \mathbb{R}^m\) and also the equation \(A\vec{x} = \vec{d}\) has 
+						      no solutions for an infinte number of vectors \(\vec{d} \in \mathbb{R}^m\).\\[0.75em]
+			\bubble & \dbubble & A matrix \(A\in \mathbb{R}^{m \times n}\) with \(m < n\) and \(A\) has a pivot in every column.\\[0.75em]
+			\bubble & \dbubble & A matrix \(A\) where the equation \(A\vec{x} = \vec{b}\) has multiple solutions but only the trivial solution is a solution to 
+						      the equation \(A\vec{x} = \vec{0}\).\\[0.75em]
+			\bubble & \dbubble & A set of linearly independent vectors from \(\mathbb{R}^n\) \(\{\vec{v}_1, \vec{v}_2, \vec{v}_3\}\) where 
+						      \(\vec{v}_3 \in \vspan\{\vec{v}_1, \vec{v}_2\}\). \\[0.75em]		
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solutions to Short Answer Questions}
+\begin{enumerate}
+	\item \begin{enumerate}
+			\item \(\mathbb{R}^3\).
+			\item \(\vspan\left\{\begin{bmatrix}2 \\ 0 \\ 1\end{bmatrix}\right\}\).
+		\end{enumerate}
+	\item \begin{enumerate}
+			\item You could plug in \(\vec{e}_1\) and \(\vec{e}_2\) if you want to. But for these types of questions, there's an easier way to go about them.
+				\[T_2(\vec{x}) = \begin{bmatrix}2x_1 \\ x_2 \\ x_1 + 2x_2\end{bmatrix} = x_1\begin{bmatrix}2 \\ 0 \\ 1\end{bmatrix} + x_2\begin{bmatrix}0 \\ 1 \\ 2\end{bmatrix} = \underbrace{\begin{bmatrix}2 & 0 \\ 0 & 1 \\ 1 & 2\end{bmatrix}}_{A}\begin{bmatrix}x_1 \\ x_2\end{bmatrix}.\]
+				Since we're taking all possible linear combinations of that matrix, it must be the standard matrix of the transformation.
+			\item \(\vec{x} = \begin{bmatrix}3 \\ -1\end{bmatrix}.\) You find this by row-reducing. (Why does this work?) 
+				\[\left[\!\!\begin{array}{cc|c}2 & 0 & 6\\ 0 & 1 & -1\\ 1 & 2 & 1\end{array}\!\!\right] 
+				\sim \dots \sim\left[\!\!\begin{array}{cc|c}1 & 0 & 3\\ 0 & 1 & -1\\ 0 & 0 & 0\end{array}\!\!\right].\]
+				\textbf{Important:} Don't include the extra 0 in the end as part of your solution!
+			\item It is one-to-one, but it's not onto.
+		\end{enumerate}
+	\item Possible answers: \[\begin{bmatrix}6 & 3 & 0 & -2 \\ 0 & 3 & 6 & 0 \\ 3 & 3 & 3 & -1\end{bmatrix}, \quad \begin{bmatrix}3 & 1 & -1 & -1 \\ 3 & 1 & -1 & -1 \\ 3 & 1 & -1 & -1\end{bmatrix}.\]
+	\item Let \(A = \begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}\) and \(\vec{b} = \begin{bmatrix}1 \\ 1 \\ 2\end{bmatrix}\). Let 
+		\(C = \begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0\end{bmatrix}\) and \(\vec{d} = \begin{bmatrix}1 \\ 1 \\ 2 \\ 0\end{bmatrix}\).
+	\item \(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}0 & 1 \\ -1 & 0\end{bmatrix}.\)
+	\item \(\begin{bmatrix}1 \\ 4 \\ 1\end{bmatrix} - \begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\). Actually any nontrivial linear combination of this vector works!
+\end{enumerate}

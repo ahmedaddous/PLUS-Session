@@ -1,0 +1,483 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb} % Add this package for \mathbb
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry} % Adjust the margins here
+
+% Adjust the indentation of question numbers
+\setlist[enumerate,1]{left=0pt}
+\setlist[enumerate,2]{left=0pt}
+\setlist[enumerate,3]{left=0pt}
+
+\begin{document}
+
+\title{Math 1554 Double PLUS Solutions}
+\author{Sri Ranganathan, Ahmed Mohammed, Nora Butler}
+\date{Fall 2023}
+\maketitle
+
+\section*{1. True/False}
+
+\begin{enumerate}[label= 1.\arabic*,left=0pt]
+    \item If $\lambda = 0$ is not an eigenvalue of a matrix, then the nullspace of that matrix is empty.
+    
+    \textbf{Answer:} \textbf{False}
+    
+    \item Every regular stochastic matrix has $\lambda = 1$ as an eigenvalue.
+    
+    \textbf{Answer:} \textbf{True}
+    
+    \item If a matrix $A$ can be row reduced to the identity matrix, it must be invertible.
+    
+    \textbf{Answer:} \underline{\hspace{1cm}}
+    
+    \item If two square matrices $A$, $B$ share an eigenvector $\bm{v}$, where $A\bm{v} = 2\bm{v}$ and $B\bm{v} = \bm{v}$, then $\lambda = 5$ is an eigenvalue of the matrix $2A + B$.
+    
+    \textbf{Answer:} \textbf{True}
+    
+    \item If $B$ is an echelon form of a matrix $A$, then the pivot columns of $B$ form a basis for $\text{Col}~A$.
+    
+    \textbf{Answer:} \textbf{False}
+    
+    \item If $A, B \in \mathbb{R}^{n\times n}$ with $\text{det}~A = 1$ and $\text{det}~B = -1$, then $AB$ is invertible.
+    
+    \textbf{Answer:} \textbf{True}
+    
+    \item If $A$ and $B$ are invertible $n \times n$ matrices, then $AB = BA$.
+    
+    \textbf{Answer:} \underline{\hspace{1cm}}
+    
+    \item If for all pairs of vectors $\bm{x}, \bm{y} \in \mathbb{R}^n$, $A\bm{x} \neq A\bm{y}$, then $\text{Nul}~A \neq \{0\}$.
+    
+    \textbf{Answer:} \textbf{False}
+    
+    \item The LU factorization for a given matrix is unique.
+    
+    \textbf{Answer:} \underline{\hspace{1cm}}
+    
+    \item For any square matrix and any scalar $c$, $\text{det}(cA) = c\text{ det}(A)$.
+    
+    \textbf{Answer:} \textbf{False}
+\end{enumerate}
+
+\section*{2. Possible/Impossible Questions}
+
+\textbf{Mark each statement as possible if it could ever be true/possible, or impossible otherwise}
+
+\begin{enumerate}[label= 2.\arabic*,left=0pt]
+    \item A non-invertible matrix $A$ with a nonzero eigenvalue.
+    
+    \textbf{Answer:} \textbf{Possible}
+    
+    \item Two matrices that are similar to each other, but one is diagonalizable while the other isn't.
+    
+    \textbf{Answer:} \textbf{Impossible}
+    
+    \item A matrix $A$ that is both an upper triangular and lower triangular matrix.
+    
+    \textbf{Answer:} \textbf{Possible}
+    
+    \item $A$ is a $5 \times 3$ matrix with rank $A = 2 \cdot \text{dim(Nul}(A))$.
+    
+    \textbf{Answer:} \textbf{Possible}
+    
+    \item Eigenvectors $v_1$ and $v_2$ of $A$ that are scalar multiples of each other, but are from different eigenspaces.
+    
+    \textbf{Answer:} \textbf{Impossible}
+    
+    \item An $n \times n$ matrix $A$ that is both invertible and has $\text{dim(Nul}(A)) = 1$.
+    
+    \textbf{Answer:} \underline{\hspace{1cm}}
+    
+    \item $A$ is a non-zero matrix whose columns don't form a basis for Col $A$.
+    
+    \textbf{Answer:} \textbf{Possible}
+    
+    \item $A \in \mathbb{R}^{3 \times 3}$ and $A$ has only 2 distinct eigenvalues.
+    
+    \textbf{Answer:} \textbf{Possible}
+    
+    \item $A \in \mathbb{R}^{3 \times 2}$ and Col $A = \mathbb{R}^3$.
+    
+    \textbf{Answer:} \textbf{Impossible}
+\end{enumerate}
+
+\section*{3. Short/Long Answer Questions}
+
+\begin{enumerate}
+    \item 
+    \[
+    \begin{bmatrix}
+    A & 0 \\
+    C & D
+    \end{bmatrix}
+    \begin{bmatrix}
+    W & X \\
+    Y & Z
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    (AW + 0Y) & (AX + 0Z) \\
+    (CW + DY) & (CX + DZ)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    I & 0 \\
+    0 & I
+    \end{bmatrix}
+    \]
+    
+    \[
+    AW = I \implies W = A^{-1}
+    \]
+    
+    \[
+    AX = 0 \implies X = 0
+    \]
+    
+    \[
+    CW + DY = 0 \implies CA^{-1} = -DY \implies Y = -D^{-1}CA^{-1}
+    \]
+    
+    \[
+    CX + DZ = I \implies Z = D^{-1}
+    \]
+    
+    Hence, \(A^{-1} = \begin{bmatrix}
+    A^{-1} & 0 \\
+    -CAD^{-1} & D^{-1}
+    \end{bmatrix}\)
+    
+    \item \textbf{LU factorization of A}
+
+    Row Reduction Steps:
+
+Step 1: Subtract 4R1 from R2 and 4R1 from the R3:
+
+\[
+\begin{bmatrix}
+1 & 2 & 2 \\
+0 & -4 & -6 \\
+0 & -2 & -4
+\end{bmatrix}
+\]
+
+Step 2: Subtract $0.5$R1 from R3:
+
+\[
+\begin{bmatrix}
+1 & 2 & 2 \\
+0 & -4 & -6 \\
+0 & 0 & -1
+\end{bmatrix}
+\]
+
+LU Decomposition:
+
+\[
+L = \begin{bmatrix}
+1 & 0 & 0 \\
+4 & 1 & 0 \\
+4 & 0.5 & 1
+\end{bmatrix}
+\]
+
+\[
+U = \begin{bmatrix}
+1 & 2 & 2 \\
+0 & -4 & -6 \\
+0 & 0 & -1
+\end{bmatrix}
+\]
+
+These matrices L and U satisfy the equation \(A = LU\).
+
+\item 
+
+Matrix A:
+
+\[
+A = \begin{bmatrix}
+0 & 1 & 2 \\
+1 & 2 & 3 \\
+3 & 1 & 1
+\end{bmatrix}
+\]
+
+Augmented Matrix \([A | I]\):
+
+\[
+\begin{bmatrix}
+0 & 1 & 2 & | & 1 & 0 & 0 \\
+1 & 2 & 3 & | & 0 & 1 & 0 \\
+3 & 1 & 1 & | & 0 & 0 & 1
+\end{bmatrix}
+\]
+
+Step 1: Swap R1 and R2:
+
+\[
+\begin{bmatrix}
+1 & 2 & 3 & | & 0 & 1 & 0 \\
+0 & 1 & 2 & | & 1 & 0 & 0 \\
+3 & 1 & 1 & | & 0 & 0 & 1
+\end{bmatrix}
+\]
+
+Step 2: R3 = R3 - 2R1:
+
+\[
+\begin{bmatrix}
+1 & 2 & 3 & | & 0 & 1 & 0 \\
+0 & 1 & 2 & | & 1 & 0 & 0 \\
+0 & -5 & -8 & | & 0 & -3 & 1
+\end{bmatrix}
+\]
+
+Step 3: R1 = R1 - 2R2 and R3 = R3 + 5R2:
+
+\[
+\begin{bmatrix}
+1 & 0 & -1 & | & -2 & 1 & 0 \\
+0 & 1 & 2 & | & 1 & 0 & 0 \\
+0 & 0 & 2 & | & 5 & -3 & 1
+\end{bmatrix}
+\]
+
+Step 4: R3 = 0.5*R2:
+
+\[
+\begin{bmatrix}
+1 & 0 & -1 & | & -2 & 1 & 0 \\
+0 & 1 & 2 & | & 1 & 0 & 0 \\
+0 & 0 & 1 & | & 2.5 & -1.5 & 0.5
+\end{bmatrix}
+\]
+
+Step 5: R1 = R1 + R3 and R2 = R2 - 2R3:
+
+\[
+\begin{bmatrix}
+1 & 0 & 0 & | & 0.5 & -0.5 & 0.5 \\
+0 & 1 & 0 & | & -4 & 3 & -1 \\
+0 & 0 & 1 & | & 2.5 & -1.5 & 0.5
+\end{bmatrix}
+\]
+
+\newpage
+The right half of the augmented matrix is now the inverse of matrix A:
+
+\[
+A^{-1} = \begin{bmatrix}
+ 0.5 & -0.5 & 0.5 \\
+-4 & 3 & -1 \\
+2.5 & -1.5 & 0.5
+\end{bmatrix}
+\]
+
+
+    \item \textbf{First solve for Ly = v, then solve for Ux = y.}
+    \[
+    L =
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    3 & 1 & 0 \\
+    1 & 1.5 & 1
+    \end{bmatrix}
+    \]
+    
+    \[
+    U =
+    \begin{bmatrix}
+    1 & 1 & 1 \\
+    0 & -2 & -6 \\
+    0 & 0 & 3
+    \end{bmatrix}
+    \]
+    
+    \[
+    v =
+    \begin{bmatrix}
+    1 \\
+    5 \\
+    10
+    \end{bmatrix}
+    \]
+    
+    First, solve Ly = v:
+    
+    \[
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    3 & 1 & 0 \\
+    1 & 15 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    y_1 \\
+    y_2 \\
+    y_3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 \\
+    5 \\
+    10
+    \end{bmatrix}
+    \]
+    
+    Solving this system of equations:
+    
+    \[
+    \begin{aligned}
+    y_1 &= 1 \\
+    3y_1 + y_2 &= 5 \implies y_2 &= 2 \\
+    y_1 + 1.5y_2 + y_3 &= 10 \implies y_3 &= 6
+    \end{aligned}
+    \]
+    
+    Next, solve Ux = y:
+    
+    \[
+    \begin{bmatrix}
+    1 & 1 & 1 \\
+    0 & -2 & -6 \\
+    0 & 0 & 3
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 \\
+    2 \\
+    6
+    \end{bmatrix}
+    \]
+    
+    Solving this system of equations:
+    
+    \[
+    \begin{aligned}
+    x_3 &= 2 \\
+    -2x_2 - 6x_3 &= 2 \implies x_2 &= -7 \\
+    x_1 + x_2 + x_3 &= 1 \implies x_1 &= 6
+    \end{aligned}
+    \]
+
+    \item Below are the steps to find the determinant of the 4x4 matrix. 
+
+    Matrix A:
+
+\[
+A = \begin{bmatrix}
+0 & x & 0 & y \\
+-3 & 1 & 3 & 2 \\
+9p & 9q & 0 & 9 \\
+2 & 2 & 0 & 2
+\end{bmatrix}
+\]
+
+To find the determinant of matrix A, we remove the third row and the third column to obtain a 3x3 matrix B:
+
+\[
+B = \begin{bmatrix}
+0 & x & y \\
+9p & 9q & 9 \\
+2 & 2 & 2
+\end{bmatrix}
+\]
+
+Now, we see that matrix B is generated by swapping R2 and R3, scaling the second row by 9 and the third row by 2. Hencem the determinant of A is:
+
+det(A) = -3*[(-1)*(2)*(9)*(6)] = 324
+
+
+\item 
+
+Given:
+
+\[
+\text{det}(A^2B^4) = 16
+\]
+
+and
+
+\[
+\text{det}(A) = 2
+\]
+
+\[
+\text{det}(kA) = k^n \cdot \text{det}(A)
+\]
+
+where \(k\) is a scalar and \(A\) is a square matrix of size \(n \times n\). So,
+
+\[
+\text{det}(2A) = (2^3) \cdot \text{det}(A) = 8 \cdot 2 = 16
+\]
+\[
+\text{det}(B^4) = (\text{det}(B))^4
+\]
+Solving for \(\text{det}(B)^4\):
+\[
+(\text{det}(B))^4 = \frac{16}{2^2} = 4
+\]
+\[
+\text{det}(B) = \sqrt[4]{4} = \sqrt{2}
+\]
+\[
+\text{det}(C) = \text{det}(2AB) = 2^3 \cdot \text{det}(A) \cdot \text{det}(B)
+\]
+Hence,\[
+\text{det}(C) = 8 \cdot 2 \cdot \sqrt{2} = 16 \sqrt{2}
+\]
+
+\item Below if the solution:
+
+\item 
+
+(a) To check if u is in the Null space (Nul) of A, we need to check if Au = 0.
+
+\[
+\begin{bmatrix}
+1 & -3 & -4 \\
+-4 & 6 & 2 \\
+-3 & 7 & 6 \\
+\end{bmatrix}
+\begin{bmatrix}
+3\\
+3 \\
+-4 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+10 \\
+-2 \\
+-12 \\
+\end{bmatrix}
+\]
+
+Since Au is not equal to the zero vector, we can conclude that u is not in the Null space of A.
+
+To check if u is in the Column space of A, we need to see if there exist scalars c1,c2,c3 such that:
+
+\[
+c_1 \cdot \text{Col}_1(A) + c_2 \cdot \text{Col}_2(A) + c_3 \cdot \text{Col}_3(A) = \mathbf{u}
+\]
+ Upon row reducing [A|u], we find that there are no pivots in the augmented column and that Ax = u has a solution. Hence, it is in Col A.
+
+ (c) Upon row reducing A, we find that there are 2 pivotal columns: column1 and column2. Hence, these 2 columns form the basis for Col A. 
+
+\[
+\text{Basis for $\text{Col}(A)$} = \left\{ \begin{bmatrix} 1 \\ -4 \\ -3 \end{bmatrix}, \begin{bmatrix} -3 \\ 6 \\ 7 \end{bmatrix} \right\}
+\]
+
+    
+    
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,31 @@
+\fancyhead[C]{\textit{Solutions}}
+
+\section{\centering Solutions}
+\subsection{Solution to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & If \(A\) is a \(n \times n\) matrix and \(A = LU\) is the \(LU\)-factorization of \(A\), then \(A\) is invertible if and only if \(U\) 
+						       is.\\[0.75em]
+			\bubble & \dbubble & If \(A \in \mathbb{R}^{m \times n}\) and \(A = LU\) is its \(LU\)-factorization, then \(L \in \mathbb{R}^{n \times n}\) and
+						      \(U \in \mathbb{R}^{m \times n}\).\\[0.75em]
+			\bubble & \dbubble & Every matrix has an \(LU\)-factorization.\\[0.75em]
+			\bubble & \dbubble & Every \emph{invertible} matrix has an \(LU\)-factorization.\\[0.75em]
+			\bubble & \dbubble & Given the matrices \(A, B, C\) and \(P = \begin{bmatrix}A & B \\ 0 & C\end{bmatrix}\) where \(P\) is \(p \times 5\) and 
+						      \(A\) is \(n \times 3\), \(C\) is \(B\) is \((p-n) \times 2\).\\[0.75em]
+			\bubble & \dbubble & To get the \(LU\) factorization of any matrix \(A\), you must reduce \(A\) to RREF to get \(U\).\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solution to Short Answer Questions}
+\begin{enumerate}
+	\item \[L = \begin{bmatrix}1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 1 & 1\end{bmatrix}, \qquad U = \begin{bmatrix}1 & 0 & -6 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}.\]
+	\item First solve for \(L\vec{y} = \vec{b}\). You get that \(\vec{y} = \begin{bmatrix}1 \\ -1 \\ 2\end{bmatrix}\). Then, solve for \(U\vec{x} = \vec{y}\). You
+		get that \(\vec{x} = \begin{bmatrix}13\\ -1 \\ 2\end{bmatrix}\).
+	\item \[\begin{bmatrix}B & I_n \\ 0 & C\end{bmatrix}\begin{bmatrix}X & Y \\ W & Z\end{bmatrix} = \begin{bmatrix}BX + W & BY + Z \\ CW & CZ\end{bmatrix} = \begin{bmatrix}I_n & 0 \\ 0 & I_n\end{bmatrix}.\]
+		We now have that \(CW = 0 \implies W = 0\), so \(BX + W = I_n \implies BX = I_n \implies X = B^{-1}.\) We then have that \(CZ = I_n \implies Z = 
+		C^{-1}\). Finally, \(BY + Z = 0 \implies BY = -C^{-1} \implies Y = -B^{-1}C^{-1}.\)
+\end{enumerate}

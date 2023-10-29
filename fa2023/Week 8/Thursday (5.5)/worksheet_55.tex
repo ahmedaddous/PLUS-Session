@@ -1,0 +1,137 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{bm}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{Covering lessons: 5.3 \& 5.5}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Diagonalization (5.3) \& Complex Eigenvalues (5.5)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\section{\centering Diagonalization (5.3)}
+	\begin{mideea}{0.9}
+		If the eigenvectors of a matrix \(A \in \mathbb{R}^{n \times n}\) form a basis for \(\mathbb{R}^n\), then it is possible to write \(A\) in the form of 
+		\[A = PDP^{-1},\] where the columns of \(P\) are the eigenvectors of \(A\) and the entries of the diagonal matrix \(D\) are the corresponding 
+		eigenvalues.
+	\end{mideea}
+
+	\begin{newquestion}
+		For the following statements, answer \textit{true} if the statement is always true, and \textit{false} otherwise.
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				true & false & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & It is possible that there exists a square matrix \(A\) that is similar to a diagonalizable matrix \(B\), but \(A\) isn't diagonalizable. \\[0.75em]
+				\bubble & \bubble & If \(\vec{x}\) is an eigenvector of \(A\) with corresponding eigenvalue of \(\lambda\), and \(A = PBP^{-1}\) for some
+							      matrix \(P\), then \(P^{-1}\vec{x}\) is an eigenvector of \(B\) with corresponding eigenvalue \(\lambda\). \\[0.75em]
+				\bubble & \bubble & Row-equivalent matrices are similar. \\[0.75em]
+				\bubble & \bubble & Two similar matrices have the same eigenvalues.*\\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+	\begin{newquestion}
+		Refer to \textit{Sample Final Exam A}, Q. 12.
+	\end{newquestion}
+
+\section{\centering Complex Eigenvalues (5.5)}
+	\begin{mideea}{0.9}
+		It is possibe for a real matrix to have complex eigenvalues and eigenvectors. If that is the case, the eigen-stuff come in \emph{conjugate pairs}. That is, if \(\lambda\) is a
+		complex eigenvalue of \(A\) with a corresponding complex eigenvector \(\vec{v}\), then \(\overline{\lambda}\) is an eigenvalue of \(A\) and \(\overline{\vec{v}}\) is the 
+		corresponding eigenvector.\footnote{\(\overline{\lambda}\) denotes the complex conjugate of \(\lambda\).}
+	\end{mideea}
+
+	\begin{newquestion}
+		Answer the following statements with \textit{possible} if the statement \emph{could} be true, or \textit{impossible} otherwise.
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				possible & impossible & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & A real \(5 \times 5\) matrix that has 3 complex eigenvalues and 2 real eigenvalues. \\[0.75em]
+				\bubble & \bubble & A real \(2 \times 2\) matrix that has \(1 + 5i\) and \(-1 + 5i\) as eigenvalues. \\[0.75em]
+				\bubble & \bubble & A real \(3 \times 3\) matrix that has a real eigenvalue and 2 complex eigenvalues. \\[0.75em]
+				\bubble & \bubble & A real \(n \times n\) matrix where \(n\) is odd and none of the eigenvalues of the matrix are real. \\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+	\begin{newquestion}
+		\(A = \begin{pmatrix}2 & -1 \\ 1 & 2\end{pmatrix}\) has an eigenvalue of \(\lambda_1 = 2 + i\). Find \(\lambda_2\) and the corresponding 
+		eigenvectors \(\vec{v}_1\) (corresponds to \(\lambda_1\)) and \(\vec{v}_2\) (corresponds to \(\lambda_2\)).
+	\end{newquestion}
+
+\include{solutions}
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\pro}{\,\textperiodcentered\,} % https://tex.stackexchange.com/a/631450/227665
+
+\title{Diagonalization}
+\subtitle{Pronounced: \textit{Di\pro{}a\pro{}go\pro{}na\pro{}li\pro{}za\pro{}tion}}
+\author{Ahmed Mohammed}
+\institute{Georgia Institute of Technology}
+\date{PLUS Session, Fall 2023}
+
+\usetheme{Berlin}
+\usefonttheme{serif}
+\usecolortheme{crane}
+
+\begin{document}
+	\begin{frame}
+		\maketitle
+	\end{frame}
+
+	\section{Open Activity}
+	\begin{frame}
+		\frametitle{Open Activity: Motivation}
+		\textbf{Question:} \pause
+		\begin{center}
+		If you know that a matrix has \(n\) eigenvectors that form a linearly independent set,\pause \ and I give you the corresponding eigenvalues,\pause
+			\ can you find the matrix?
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Open Activity: Introduction}
+		\begin{definition}
+			A matrix \(A \in \mathbb{R}^{n \times n}\) is diagonalizable if and only if it is \textbf{similar} to a diagonal matrix.
+		\end{definition}
+		
+		By similar we mean that \(A\) could be expressed as \(A = PBP^{-1}\), where \(P\) is an invertible matrix and \(B\) is the matrix that \(A\)'s similar to.
+		\pause
+
+		If \(A\) is similar to a \emph{diagonal} matrix \(D\), then the matrix is diagonalizable. (Note that the entries of \(D\) are \emph{necessarily} the
+		eigenvalues of \(A\)).
+	\end{frame}
+
+	\section{Main Activity: Exercises}
+		\begin{frame}
+			\frametitle{Main Activity: Why? (1)}
+
+			Consider the earlier question.\pause\  Find the matrix whose eigenvalues are \(\lambda_1 = \lambda_2 = 2\) and \(\lambda_3 = 1\) with 
+			corresponding eigenvectors \(\vec{v}_1 = \begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\), \(\vec{v}_2 = \begin{bmatrix}2 \\ 1 \\ 0\end{bmatrix}\), 
+			and \(\vec{v}_3 = \begin{bmatrix}1 \\ 1 \\ 0\end{bmatrix}\).
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Main Activity: Why (2)}
+			\begin{itemize}
+				\item<1-> Is \(\begin{bmatrix}-6 & 8 & 0 \\ -4 & 6 & 0 \\ -11 & 12 & 3\end{bmatrix}\) diagonalizable?
+				\item<2-> Is it possible that \(A\) is similar to a diagonalizable matrix \(B\), but \(A\) isn't diagonalizable?
+				\item[\textbf{T/F}]<3-> If \(A\) and \(B\) are similar matrices, then \(A^2\) is similar to \(B^2\). (What if \(A\) is diagonal? Is \(A^2\) as well?)
+				\item[\textbf{T/F}]<4-> Row-equivalent matrices are similar.
+				\item[\textbf{T/F}]<5-> Every invertible matrix is diagonalizable.
+				\item<6-> In the spirit of the previous question, find a \(3 \times 3\) matrix that is
+						\begin{enumerate}
+							\item<7-> Invertible and diagonalizable.
+							\item<8-> Singular and diagonalizable.
+							\item<9-> Invertible and not diagonalizable.
+							\item<10-> Singular and not diagonalizable.
+						\end{enumerate} 
+			\end{itemize}
+		\end{frame}
+
+	\begin{frame}
+		\frametitle{Verify}
+		If \(A \in \mathbb{R}^{n \times n}\) and \[B = P^{-1}AP, \quad P \in \mathbb{R}^{n \times n}\] and \(\vec{x}\) is an eigenvector of \(A\)
+		corresponding to the eigenvalue \(\lambda\), then \(P^{-1}\vec{x}\) is an eigenvector of \(B\) corresponding to \(\lambda\) as well.
+	\end{frame}
+	
+	\section{Closing Activity}
+		\begin{frame}
+			\frametitle{A Rabbit Hole}
+			\begin{itemize}
+				\item<1-> Diagonalization leads to very interesting ideas. If you want to know more, read Section 5.4, and go to office hours!
+				\item<2-> Read the online Interative Linear Algebra textbook (ILA) (for more intuition)!
+				\item<3-> So far, we've dealt with \emph{real} eigenvalues. What about if a real matrix has \emph{complex} eigenvalues?
+			\end{itemize} \pause
+			\onslide<4>{\[A = PCP^{-1}\] As it'll turn out, every real matrix that could be written in this form defines a rotation-dilation transformation!}
+		\end{frame}
+\end{document}

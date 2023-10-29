@@ -1,0 +1,75 @@
+
+\fancyhead[C]{\textit{Solutions}}
+
+\section{Solutions}
+
+\subsection{Solutions to \textit{Diagonalization} Section}
+
+\subsubsection{Solutions to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \dbubble & It is possible that there exists a square matrix \(A\) that is similar to a diagonalizable matrix \(B\), but \(A\) isn't diagonalizable. \\[0.75em]
+			\dbubble & \bubble & If \(\vec{x}\) is an eigenvector of \(A\) with corresponding eigenvalue of \(\lambda\), and \(A = PBP^{-1}\) for some
+						      matrix \(P\), then \(P^{-1}\vec{x}\) is an eigenvector of \(B\) with corresponding eigenvalue \(\lambda\). \\[0.75em]
+			\bubble & \dbubble & Row-equivalent matrices are similar. \\[0.75em]
+			\dbubble & \bubble & Two similar matrices have the same eigenvalues.*\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsubsection{Solutions to \textit{Q2}}
+	For (i), \(\lambda_1 = 1/2\), \(\lambda_2=2\). For (ii), look at sketch below.
+	\begin{figure}[!h]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[scale=20, grid=major, axis line style={draw=none}, xmin=-5,xmax=5,ymin=-5,ymax=5, xtick distance=1,
+					   ytick distance=1,y={({sqrt(3)*0.5}, 0.5)}, x={(0.5, {-sqrt(3)*0.5})}, xticklabel=\empty, yticklabel=\empty]
+				\addplot[semithick, ->, gray] coordinates {(0, 0) (0, 1)} node[below] {\(\vec{v}_2\)};
+				\addplot[semithick, ->, gray] coordinates {(0, 0) (1, 0)} node[right] {\(\vec{v}_1\)};
+	
+				\addplot[thick, ->] coordinates {(0, 0) (-2, 2)} node[right] {\(\vec{x}\)};
+				\addplot[thick, ->] coordinates {(0, 0) (-4, -2)} node[left] {\(\vec{y}\)};
+	
+				\addplot[thick, ->, purple] coordinates {(0, 0) (-2, -4)} node[left] {\(A\vec{y}\)};
+				\addplot[thick, ->, purple] coordinates {(0, 0) (-1, 4)} node[right] {\(A\vec{x}\)};
+			\end{axis}
+		\end{tikzpicture}
+	\end{figure}
+
+	For (iii), consider that any vector \(\vec{w} \in \mathbb{R}^2\) could be written as a linear combination of \(\vec{v}_1, \vec{v}_2\). That is, any vector 
+	\(\vec{w}\) could be expressed as follows \[\vec{w} = c_1\vec{v}_1 + c_2\vec{v}_2.\] Applying \(A\) to \(\vec{w}\) amounts to scaling the weights
+	(coordinates!) \(c_1, c_2\). That is, \[A\vec{w} = Ac_1\vec{v}_1 + Ac_2\vec{v}_2 = \lambda_1c_1\vec{v}_1 + \lambda_2c_2\vec{v}_2.\]
+	Thus, applying \(A\) \(k\) times could be expressed as \[A^k\vec{w} = \lambda_1^kc_1\vec{v}_1 + \lambda_2^kc_2\vec{v}_2.\]
+	
+	Since \(\lvert\lambda_2\rvert > 1\), which means that \(\lambda_2^kc \to \infty\) as \(k \to \infty\). To avoid this, our vector \(\vec{w}\) must not have
+	any component reliant on \(\vec{v}_2\). (\(c_2 = 0\).) So any vector \(\vec{w} = c_1\vec{v}_1\) with \(c_1 \in \mathbb{R}\) works.
+
+\subsection{Solutions to \textit{Complex Eigenvalues} Section}
+	\subsubsection{Solutions to Possible/Impossible Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \dbubble & A real \(5 \times 5\) matrix that has 3 complex eigenvalues and 2 real eigenvalues. \\[0.75em]
+			\bubble & \dbubble & A real \(2 \times 2\) matrix that has \(1 + 5i\) and \(-1 + 5i\) as eigenvalues. \\[0.75em]
+			\dbubble & \bubble & A real \(3 \times 3\) matrix that has a real eigenvalue and 2 complex eigenvalues. \\[0.75em]
+			\bubble & \dbubble & A real \(n \times n\) matrix where \(n\) is odd and none of the eigenvalues of the matrix are real. \\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsubsection{Solutions to \textit{Q4}}
+	We automatically know that the second eigenvalue is \(2 - i\). We now have to find a basis for each eigenspace. We use the usual method. For 
+	\(\lambda_1 = 2 + i\):
+	\[\begin{pmatrix}2 - (2 + i) & -1 \\ 1 & 2 - (2 + i)\end{pmatrix} = \begin{pmatrix}-i & -1 \\ 1 & -i\end{pmatrix} \sim \begin{pmatrix} 1 & -i \\ 0 & 0\end{pmatrix}.\] 
+
+	So the paramteric vector form of the solution set is \(\vec{x} = t\begin{pmatrix}i \\ 1\end{pmatrix}\). Choose 
+	\(\vec{v} = \begin{pmatrix}i \\ 1\end{pmatrix}\).
+
+	We know that the conjugate of a complex eigenvector is also an eigenvector of a real matrix, so the corresponding paramteric vector form for the 
+	solution set is \(\vec{y} = t\begin{pmatrix}-i \\ 1\end{pmatrix}\). Choose \(\vec{v}_2 = \begin{pmatrix}-i \\ 1\end{pmatrix}\). 
+	

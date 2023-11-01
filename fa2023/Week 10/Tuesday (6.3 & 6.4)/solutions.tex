@@ -1,0 +1,58 @@
+\fancyhead[C]{\textit{Solutions}}
+\section{\centering Solutions}
+
+\subsection{Solutions to \textit{T/F Questions}}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \dbubble & The projection of a vector onto a subspace \(W\) depends on the chosen basis for \(W\).\\[0.75em]
+			\dbubble & \bubble & \(\lambda = 1\) is always an eigenvalue of the standard matrix of the transformation that projects vectors in the space
+						      onto the subspace \(W\).\\[0.75em]
+			\dbubble & \bubble & If \(\vspan \{\vec{a}_1, \vec{a}_2, \vec{a}_3\} = W\), and \(\{\vec{u}_1, \vec{u}_2, \vec{u}_3\}\)
+					    is the resulting set of applying the Gram-Schmidt process on the original set of vectors, then 
+					    \(\vspan\{\vec{u}_1, \vec{u}_2, \vec{u}_3\} = W\) as well.\\[0.75em]
+			\dbubble & \bubble & Every subspace \(W\) of \(\mathbb{R}^n\) has an orthonormal basis.\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+
+\subsection{Solutions to \textit{Possible/Impossible Questions}}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\dbubble & \bubble & A vector whose projection onto a subspace \(W\) is itself. \\[0.75em]
+			\dbubble & \bubble & A non-zero vector whose projection into a subspace is the zero vector.\\[0.75em]
+			\bubble & \dbubble & A vector \(\vec{y}\) such that \(\vec{y} - \operatorname{proj}_W \vec{y} \notin W^\perp\).\\[0.75em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+
+\subsection{Solutions to \textit{Short Answer Questions}}
+	\begin{enumerate}
+		\item Since \(A\) is an orthogonal matrix, \(\|A\vec{v}\| = \|\vec{v}\| = \sqrt{1^2 + 0^2 + 3^2} = \sqrt{10}\).
+		\item We know that for any vector \(\vec{y} \in \mathbb{R}^n\), we can decompose \(\vec{y}\) into the sum of a vector \(\vec{\hat{y}} \in W\) and
+			a vector \(\vec{z} \in W^\perp\). That is, we can always decompose any vector \(\vec{y}\) as \[\vec{y} = \vec{\hat{y}} + \vec{z}.\] We know that
+			\(\vec{\hat{y}} = \proj_W\vec{y}\), and we're given what the projected vector is. All we have to do now is to find an appropriate vector 
+			\(\vec{z} \ne \vec{0}\). The vector \(\vec{z}\) must satisfy the system of linear equations 
+			\[\left\{\begin{aligned}
+				\vec{z} &\cdot \vec{u}_1 = 0 \\
+				\vec{z} &\cdot \vec{u}_2 = 0
+			\end{aligned}\right. \iff \left\{\begin{aligned}z_1 + z_2 + z_3 &= 0  \\ -z_1 + 0z_2 + z_3 &= 0\end{aligned}\right.\]
+			We find that any \(\vec{z} = t\begin{bmatrix}-1 \\ -2 \\ 1\end{bmatrix}\) works, for any \(t \in \mathbb{R}\). So a valid answer is 
+			\[\vec{y} = (2\vec{u}_1 + 3\vec{u}_2) + \begin{bmatrix}-1 \\ -2 \\ 1\end{bmatrix},\] and in general we can multiply the rightmost vector by 
+			any real scalar to get a new vector that satisfies this problem.
+
+			To answer the ``challenge" problem, we just have to make sure that \(\|\vec{z}\| = 3\). So, we need that 
+			\[\sqrt{t^2 + 4t^2 + t^2} = 3 \iff \sqrt{6t^2} = 3 \iff \lvert t \rvert = \frac{3}{\sqrt{6}}.\] So both 
+			\[\vec{y} = (2\vec{u}_1 + 3\vec{u}_2) + \frac{3}{\sqrt{6}}\begin{bmatrix}-1 \\ -2 \\ 1\end{bmatrix}, \quad \vec{y} = (2\vec{u}_1 + 3\vec{u}_2) - \frac{3}{\sqrt{6}}\begin{bmatrix}-1 \\ -2 \\ 1\end{bmatrix}\] satisfy the constraints.
+
+		\item This is just \(\proj_P \vec{v} = \begin{bmatrix}3 \\ 5 \\ 3\end{bmatrix}\). Don't forget to find an orthogonal basis for \(P\)!
+		\item This new basis is orthogonal, so the typical formula for orthogonal projection could be used! You'll find that you get the same answer :)
+	\end{enumerate}
+

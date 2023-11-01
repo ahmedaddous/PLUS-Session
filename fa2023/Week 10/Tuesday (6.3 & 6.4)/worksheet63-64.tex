@@ -1,0 +1,146 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Worksheet 6.3 \& 6.4},
+    pdfpagemode=FullScreen,
+}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{Covering lessons: 6.3 -- 6.4}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Fall 2023}
+\fancyhead[C]{\textit{(6.3) \& (6.4)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+	\maketitle
+	\section{\centering T/F Questions}
+	\begin{newquestion}
+		Mark the following statements as \textit{true} only if the statement is \emph{always} true. \(W \ne \{\vec{0}\}\).
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				true & false & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & The projection of a vector onto a subspace \(W\) depends on the chosen basis for \(W\). [\href{https://www.geogebra.org/3d/bmzdpq9p}{Relevant link.}]\\[0.75em]
+				\bubble & \bubble & \(\lambda = 1\) is always an eigenvalue of the standard matrix of the transformation that projects vectors in the space
+							      onto the subspace \(W\).\\[0.75em]
+				\bubble & \bubble & If \(\vspan \{\vec{a}_1, \vec{a}_2, \vec{a}_3\} = W\), and \(\{\vec{u}_1, \vec{u}_2, \vec{u}_3\}\)
+						    is the resulting set of applying the Gram-Schmidt process on the original set of vectors, then 
+						    \(\vspan\{\vec{u}_1, \vec{u}_2, \vec{u}_3\} = W\) as well.\\[0.75em]
+				\bubble & \bubble & Every subspace \(W\) of \(\mathbb{R}^n\) has an orthonormal basis.\\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+	\section{\centering Possible/Impossible Questions}
+	\begin{newquestion}
+		Answer the following statements with \textit{possible} if the statement \emph{could} be true/happen. \(W \ne \{\vec{0}\}\).
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				possible & impossible & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & A vector whose projection onto a subspace \(W\) is itself. \\[0.75em]
+				\bubble & \bubble & A non-zero vector whose projection into a subspace is the zero vector.\\[0.75em]
+				\bubble & \bubble & A vector \(\vec{y}\) such that \(\vec{y} - \operatorname{proj}_W \vec{y} \notin W^\perp\).\\[0.75em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+	\section{\centering Short Answer Questions}
+	\begin{newquestion}
+		\begin{enumerate}
+			\item Let \(A = \small \begin{bmatrix}1/\sqrt{2} & 0 & -1/\sqrt{2}\\ 0 & 1 & 0\\ 1/\sqrt{2} & 0 & 1/\sqrt{2}\end{bmatrix}\) and 
+			      \(\vec{v} = \begin{bmatrix}1 \\ 0 \\ 3\end{bmatrix}\). Find \(\|A\vec{v}\|\).
+			\item Let \(\vspan\{\vec{u}_1, \vec{u}_2\} = W\), with \(\vec{u}_1 = \begin{bmatrix}1 \\ 0 \\ 1\end{bmatrix}\), 
+			      \(\vec{u}_2 = \begin{bmatrix}-1 \\ 1 \\ 1\end{bmatrix}\). Find a vector \(\vec{y} \notin W\) such that
+		              \(\proj_W \vec{y} = 2\vec{u}_1 + 3\vec{u}_2\). \href{https://www.desmos.com/calculator/a6xmnphvbp}{Clicky linky} here.
+				(If you want an extra challenge, find the vectors \(\vec{y} \notin W\) that are a distance 3 away from the subspace.)
+			\item Let \(P = \vspan \{\vec{p}_1, \vec{p}_2\}\); \(\vec{p}_1 = \begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix}\)
+			      and \(\vec{p}_2 = \begin{bmatrix}1 \\ 2 \\ 1\end{bmatrix}\). Find the closest vector in \(P\) to the vector 
+			      \(\vec{v} = \begin{bmatrix}1 \\ 5 \\ 5\end{bmatrix}\).
+			\item Try answering the previous question, but with the new basis 
+			      \(\left\{\begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix}, \begin{bmatrix}-1 \\ 2 \\ -1\end{bmatrix}\right\}\).
+		\end{enumerate}
+	\end{newquestion}
+\include{solutions.tex}
+\end{document}

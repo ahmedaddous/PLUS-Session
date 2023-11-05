@@ -1,0 +1,129 @@
+\section{Solutions}
+
+\subsection{Solutions to T/F Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			true & false & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \dbubble & If \(A\) is \(4 \times 3\) with \(\dim(\rowspace (A)^\perp) = 2\), then \(\rank A = 2\). \\[1em]
+			\dbubble & \bubble & If \(\vec{x}\) belongs to \((\colspace A)^\perp\), then \(A^T\vec{x} = \vec{0}\).\\[1em]
+			\dbubble & \bubble & Given a matrix \(A\) is orthogonal, then it is also invertible.\\[1em]
+			\dbubble & \bubble & If a matrix \(A\) has a \(QR\) factorization, then \(\colspace A = \colspace Q\).\\[1em]
+			\dbubble & \bubble & Given a subspace \(W\) of \(\mathbb{R}^3\), any vector \(\vec{v} \in \mathbb{R}^3\) can be expressed as a sum of a
+						      vector in \(W\) and \(W^\perp\). \\[2em]
+			\dbubble & \bubble & The Gram-Schmidt process applied on a basis of a subspace \(W\) does not necessarily yield an orthonormal basis for \(W\).\\[2em]
+			\dbubble & \bubble & If \(\nullspace(A^T) = \{\vec{0}\}\), then \(\vec{x} \mapsto A\vec{x}\) defines an onto linear transformation. \\[1em]
+			\dbubble & \bubble & If \(A\) is diagonalizable and similar to \(B\), then \(B\) is also diagonalizable. \\[1em]
+			\dbubble & \bubble & \(\proj_W \vec{y} = \vec{0}\) if and only if \(\vec{y} \in W^\perp\).\\[1em]
+			\dbubble & \bubble & If \(A \in \mathbb{R}^{2 \times 2}\) and has a complex eigenvalue \(\lambda_1\), then 
+						      \(\lvert \lambda_1 \rvert = \lvert \lambda_2 \rvert\), where \(\lambda_2\) is the second eigenvalue of \(A\).\\[2em]
+			\dbubble & \bubble & For any orthogonal matrix \(A\), \(\lvert \det(A) \rvert = 1\).\\[1em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+\subsection{Solutions to Possible/Impossible Questions}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+			possible & impossible & \\
+			\specialrule{\lightrulewidth}{0.25em}{1.25em}
+			\bubble & \dbubble & \(A^TA = AA^T = I\) and \(\lambda = 0\) is an eigenvalue of \(A\). \\[1em]
+			\bubble & \dbubble & An equation \(A\vec{x} = \vec{b}\) that doesn't have a least-squares solution. \\[1em]
+			\bubble & \dbubble & An onto linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) whose standard matrix is \(A\) and 
+						      \(\dim(\nullspace(A^T)^\perp)\) = 1.\\[2em]
+			\bubble & \dbubble & A \(3 \times 3\) real matrix with only complex eigenvalues. \\[1em]
+			\dbubble & \bubble & A \(3 \times 2\) matrix whose column space is \(W\) and \(W^\perp\) is a line. \\[1em]
+			\bubble & \dbubble & An \(n \times p\) matrix \(U\) where \(p < n\) and \(UU^T\vec{x} = \vec{x}\) for all \(\vec{x} \in \mathbb{R}^n\). \\[1em]
+			\dbubble & \bubble & Two vectors \(\vec{v} \ne \vec{u}\) but \(\proj_W \vec{v} = \proj_W \vec{u}\), where \(W\) is a subspace of 
+						     \(\mathbb{R}^n\).\\[1em]
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+
+\subsection{Solutions to Short/Long Answer Questions}
+\begin{enumerate}
+	\item[\textbf{Q1}] \(\left\{\begin{bmatrix}-2 \\ -5 \\ 1\end{bmatrix}\right\}\). Any scalar multiple of this vector works.
+	
+	\item[\textbf{Q2}] We do this by expressing \(\vec{x}\) as \[\vec{x} = \underbrace{\proj_\mathcal{U}\vec{x}}_{\in \mathcal{U}} + \underbrace{\vec{z}}_{\in \mathcal{U}^\perp}.\] In this case, 
+				   \(\proj_\mathcal{U}\vec{x} = \displaystyle \frac{\vec{u} \cdot \vec{x}}{\vec{u} \cdot \vec{u}}\vec{u} = \frac{2}{5}\vec{u}\). So
+				   \(\vec{z} = \vec{x} - \proj_\mathcal{U} \vec{x} = 4/5\begin{bmatrix}-1 \\ 7\end{bmatrix}.\)
+	
+	\item[\textbf{Q3}]
+			\begin{enumerate}
+				\item This is \(\|\vec{v} - \vec{u}\| = \|\vec{u} - \vec{v}\| = \sqrt{45}\).
+				\item No, as \(\vec{u} \cdot \vec{w} \ne 0\).
+				\item We apply Gram-Schmidt here. Let \(\vec{v}_1 = \vec{u}\). Now, \[\vec{v}_2 = \vec{w}  - \proj_{\vec{u}} \vec{w} 
+					= 1/9\begin{bmatrix}14 \\ -2 \\ 4 \end{bmatrix}.\] So \(\{\vec{v}_1, \vec{v}_2\}\) is an orthogonal basis for this subspace.
+			\end{enumerate}
+			
+	
+	\item[\textbf{Q4}] Multiple answers. One such answer is \[\begin{bmatrix}1 & 1 & 1 \\ -1 & -1 & -1\end{bmatrix}.\] The most general answer is in the form 
+			\[\begin{bmatrix}a & ca & da \\ -a & -ca & -da\end{bmatrix},\] where \(c, d \in \mathbb{R}.\) Note that the question is simply asking for
+			a matrix whose columns are orthogonal to \(\begin{bmatrix}2 \\ 2\end{bmatrix}\). We know that the columnspace is of dimension 1 because
+			of the fact that \(\dim((\colspace A)^\perp) = 1\). This means, you only need to find one vector orthogonal to 
+			\(\begin{bmatrix}2 \\ 2\end{bmatrix}\) and the rest has to be a scalar multiple of that.
+
+	\item[\textbf{Q5}]  Answers are below.
+			\begin{enumerate}
+				\item The closest vector to in \(\mathcal{W}\) to \(\vec{v} = \begin{bmatrix}1 \\ 5 \\ 1\end{bmatrix}\) is \(\proj_\mathcal{W} \vec{v}.\)
+				In this case, that's 
+				\[\proj_\mathcal{W} \vec{v}
+				  = \frac{\vec{v} \cdot \vec{u}_1}{\vec{u}_1 \cdot \vec{u}_1}\vec{u}_1 
+				   + \frac{\vec{v} \cdot \vec{u}_2}{\vec{u}_2 \cdot \vec{u}_2}\vec{u}_2 = \begin{bmatrix}8/3 \\ 5/3 \\ -2/3\end{bmatrix}\]
+				\item Since the vector is already in \(\mathcal{W}\), finding it's projection amounts to finding a linear combination of \(\{\vec{u}_1, \vec{u}_2\}\)
+					that'll yield \(\vec{v} = \begin{bmatrix}3 \\ 1 \\ 1\end{bmatrix}\). That is 
+					\[\proj_\mathcal{W} \vec{v} = \frac{\vec{u}_1 \cdot \vec{v}}{\vec{u}_1 \cdot \vec{u}_1}\vec{u}_1 + \frac{\vec{u}_2 \cdot \vec{v}}{\vec{u}_2 \cdot \vec{u}_2}\vec{u}_2 = \begin{bmatrix}\vec{u}_1 & \vec{u}_2\end{bmatrix}\begin{bmatrix}\frac{\vec{u}_1 \cdot \vec{v}}{\vec{u}_1 \cdot \vec{u}_1}\\[0.5em] \frac{\vec{u}_2 \cdot \vec{v}}{\vec{u}_2 \cdot \vec{u}_2}\end{bmatrix}.\] The final vector is the coordinate of \(\vec{v}\) under the new basis. 
+					Computing the values will show that the coordinate is \(\begin{bmatrix}2 \\ 1\end{bmatrix}\).
+				\item Note that \(\{\vec{u}_1, \vec{u}_2, \vec{u}_3\}\) forms an orthogonal set. Therefore, if \(\mathcal{W} =  \vspan\{\vec{u}_1, \vec{u}_2\}\),
+					 then \(\mathcal{W}^\perp = \vspan\{\vec{u}_3\}\).\footnote{This is shown in the textbook, and it's easy to verify for yourself.} Since we want
+					 the vector to be orthogonal to \(\vec{u}_3\), it should live in \(\mathcal{W}\). Since the vector already lives in \(\mathcal{W}\), then the weights of the 
+					projection are just its new coordinates under the basis formed by \(\mathcal{B} = \{\vec{u}_1, \vec{u}_2\}.\) (If you tell me the
+					projection, you're also telling me the coordinates in this case!) This alone is enough to tell us that \(\vec{x} = 5\vec{u}_1 + 3\vec{u}_2.\)
+				\end{enumerate}
+
+	\item[\textbf{Q6}] \(\|2\vec{v} + 3\vec{u}\|^2 = 4\|\vec{v}\|^2 + 9\|\vec{u}\|^2 = 13.\) We've used the Pythagorean Theorem. 
+			So \(\|2\vec{v} + 3\vec{u}\| = \sqrt{13}\).
+	\item[\textbf{Q7}] \((\nullspace A)^\perp = \rowspace A,\) and \(\dim(\rowspace A) = \dim(\colspace A) = 4.\) So the sum is \textbf{8}. 
+
+	\item[\textbf{Q8}] \[R\vec{\hat{x}} = Q^T\vec{b} \implies \begin{bmatrix}2 & 2 \\ 0 & 1\end{bmatrix}\vec{\hat{x}}
+								 = \sqrt{2} \cdot \frac{1}{\sqrt{2}} \begin{bmatrix}1 & - 1 \\ 1 & 1\end{bmatrix}
+								 \begin{bmatrix}2 \\ 1\end{bmatrix} = \begin{bmatrix}1 \\ 3\end{bmatrix}.\]
+
+					Row-reduce the augmented matrix to reach to the solution. 
+					\[\left(\!\!\begin{array}{cc|c}2 & 2 & 1 \\ 0 & 1 & 3\end{array}\!\!\right) 
+					  \sim \left(\!\!\begin{array}{cc|c}2 & 0 & -5 \\ 0 & 1 & 3\end{array}\!\!\right)
+					  \sim \left(\!\!\begin{array}{cc|c}1 & 0 & -5/2 \\ 0 & 1 & 3\end{array}\!\!\right).\]
+					We get that \(\vec{\hat{x}} = \begin{bmatrix}-5/2 \\ 3\end{bmatrix}\).
+
+	\item[\textbf{Q9}] Follow the typical procedure for solving these types of problems.
+					\[\begin{aligned}
+						1 &= \alpha (-1)^2 + \beta &&\implies 1 = \alpha + \beta \\
+						3 &= \alpha (1)^2  + \beta &&\implies 3 = \alpha + \beta \\
+						2 &= \alpha (1)^2  + \beta &&\implies 2 = \alpha + \beta \\
+						1 &= \alpha (1)^2  + \beta &&\implies 1 = \alpha + \beta \\
+					\end{aligned}\]
+					Something weird is happening here. The matrix equation associated with this system looks like 
+					\[\begin{bmatrix}1 & 1 \\ 1 & 1 \\ 1 & 1 \\ 1 & 1\end{bmatrix}\begin{bmatrix}\alpha \\ \beta\end{bmatrix} 
+					  = \begin{bmatrix}1 \\ 3 \\ 2 \\ 1\end{bmatrix}\]
+					\textbf{The columns do not form a linearly independent set, so we'll have an infinite number of least-square solutions for 
+					\(\alpha, \beta\) where they all yield the same amount of error}. Moving on,
+					\[A^TA = \begin{bmatrix}1 & 1 & 1 & 1 \\ 1 & 1 & 1 & 1\end{bmatrix}
+					\begin{bmatrix}1 & 1 \\ 1 & 1 \\ 1 & 1 \\ 1 & 1\end{bmatrix} = \begin{bmatrix}4 & 4 \\ 4 & 4\end{bmatrix};\]
+
+					\[A^T\vec{b} = \begin{bmatrix}1 & 1 & 1 & 1 \\ 1 & 1 & 1 & 1\end{bmatrix}\begin{bmatrix}1 \\ 3 \\ 2 \\ 1\end{bmatrix}
+					 = \begin{bmatrix}7 \\ 7\end{bmatrix}.\]
+
+					Now, we solve the normal equations \(A^TA\vec{\hat{x}} = A^T\vec{b}.\) 
+					\[\left[\!\!\begin{array}{cc|c}4 & 4 & 7 \\ 4 & 4 & 7\end{array}\!\!\right]
+					  \sim \left[\!\!\begin{array}{cc|c}4 & 4 & 7 \\ 0 & 0 & 0\end{array}\!\!\right] 
+					  \sim \left[\!\!\begin{array}{cc|c}1 & 1 & 7/4 \\ 0 & 0 & 0\end{array}\!\!\right].\]
+					We find that \[\begin{bmatrix}\alpha \\ \beta\end{bmatrix} = \begin{bmatrix}7/4 \\ 0\end{bmatrix} 
+					+ \beta\begin{bmatrix}-1 \\ 1\end{bmatrix},\] where \(\beta\) is the free variable. Each choice of \(\alpha, \beta\) obtained from the
+					parametric vector equation yields a curve with the same amount of error.
+
+	\item[\textbf{Q10}] There are multiple answers. We present ours here.
+					\[A = \begin{bmatrix}1 & 2 & 1 \\ 0 & 1 & 1 \\ 3 & 0 & 1\end{bmatrix}\begin{bmatrix}8 & 0 & 0 \\ 0 & 8 & 0 \\ 0 & 0 & 12\end{bmatrix}\begin{bmatrix}1 & 2 & 1 \\ 0 & 1 & 1 \\ 3 & 0 & 1\end{bmatrix}^{-1}.\]
+\end{enumerate}

@@ -1,0 +1,86 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+% \usepackage{hyperref}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{Covering lesson: 6.5}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Fall 2023}
+\fancyhead[C]{\textit{Solution(s) to Least-Squares Problems}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\proj}{proj}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+	\maketitle
+
+	Hi.
+\end{document}

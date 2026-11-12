@@ -1,0 +1,134 @@
+\documentclass[10pt, titlepage]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{bm}
+
+
+\title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
+\author{Covering lessons: 7.3 \& 7.4}
+\date{Fall 2023}
+
+% ------- Set up header -------
+\renewcommand{\sectionmark}[1]{\markright{#1}} % from https://tex.stackexchange.com/a/317393/227665
+\pagestyle{fancy}
+\fancyhead[L]{Fall 2023}
+%\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[C]{\textit{Constrained Opt. (7.3) \& SVD (7.4)}}
+\fancyhead[R]{\textbf{\thepage}}
+% -------------------------------------------------------
+
+% ------- Set up Main Idea box environment -------
+\newcounter{mainideas}
+\setcounter{mainideas}{1}
+\newcommand{\mainidea}{\textbf{Main Idea \#\themainideas \stepcounter{mainideas}}}
+\setlength\fboxsep{1em}
+%\newcommand{\midea}[2]{\begin{center}\fbox{\parbox{#1}{\centering \mainidea #2}} \end{center}} % Could be environment but I couldn't bother
+
+% The way this works is that the savebox collects whatever was between the minipage and the end of it, then in the last line of the definition of the environment
+% we regurgigate whatever was collected into an fbox which we center.
+\newsavebox{\mybox}
+\newenvironment{mideea}[1]
+{%
+\begin{lrbox}{\mybox}%
+	\begin{minipage}{#1\textwidth}
+		{\centering \mainidea \par}
+
+}
+{\end{minipage}\end{lrbox}\begin{center}\fbox{\usebox{\mybox}}\end{center}}
+% -------------------------------------------------------
+
+% ------- Set up activity environment -------
+\newcounter{question}
+\setcounter{question}{1}
+\newenvironment{newquestion}
+{
+	\noindent\textbf{Question \thequestion}
+}
+{
+\stepcounter{question}
+\par
+}
+% -------------------------------------------------------
+
+
+% ------- Set up math stuff -------
+\renewcommand{\vec}[1]{\bm{#1}}
+\DeclareMathOperator{\vspan}{Span}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
+\DeclareMathOperator{\nullspace}{Nul}
+\DeclareMathOperator{\rank}{rank}
+% -------------------------------------------------------
+
+% ------- Set up circle -------
+\newcommand{\bubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=white] (0,0) circle;}
+\newcommand{\dbubble}{\tikz[baseline=-0.625ex]\draw[radius=0.5em, fill=black] (0,0) circle;}
+% -------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\section{\centering T \& F}
+	\begin{newquestion}
+		For the following statements, answer \textit{true} if the statement is always true, and \textit{false} otherwise.
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+				true & false & \\
+				\specialrule{\lightrulewidth}{0.25em}{1.25em}
+				\bubble & \bubble & The quadratic form defined by \(Q(\vec{x}) = \vec{x}^TBB^T \vec{x}\) is always positive definite. \\[0.75em]
+				\bubble & \bubble &  If \(\sigma_1, \sigma_2, \dots , \sigma_n\) are the singular values of a \(n \times n\) matrix \(A\) , then 
+							     \(\det A = \sigma_1\sigma_2 \dots\sigma_n \). \\[0.75em]
+				\bubble & \bubble & Any matrix has a singular value decomposition.\\[0.75em]
+				\bubble & \bubble & If \(Q\) is a positive definite quadratic form with \(Q(\vec{x}) = \vec{x}^TA\vec{x}\) and \(A = A^T\), then the largest eigenvalue of \(A\) is the maximum value \(Q\) takes on in its domain.\\[0.5em]
+				\bubble & \bubble & Given \(A \in \mathbb{R}^{m \times n}\),  the largest singular value of \(A\) is the largest value \(Q(\vec{x}) = \|A\vec{x}\|\) takes on under the constraint \(\|\vec{x}\| = 1\).\\[0.5em]
+				\bubble & \bubble & For any nonzero matrix \(C \in \mathbb{R}^{m \times n}\), \(F(\vec{x}) = \|C\vec{x}\|^2\) defines a quadratic form.\\[0.5em]
+				\bubble & \bubble & If \(A \in \mathbb{R}^{m \times n}\) and the transformation \(\vec{x} \mapsto A\vec{x}\) is one-to-one, then 
+							    it is impossibe for \(A\) to any singular values that equal to 0.\\[0.5em]
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{newquestion}
+
+\section{\centering Short Answer Questions}
+	\begin{newquestion}
+		Try out the following questions.
+		\begin{enumerate}
+			\item Given the quadratic form \(Q(\vec{x}) = x_1^2 + 4x_2^2 + x_3^2 + 2x_1x_3\), there exists a change of variables \(\vec{x} = P\vec{y}\)
+				that yields a new quadratic form \(Q'\) such that \(Q'\) takes on the same values as \(Q\), with the additional property that no cross-terms
+				exist in \(Q'(\vec{y})\). Find \(Q'(\vec{y})\).
+				\begin{enumerate}
+					\item What is \(\max_{\|\vec{x}\|  = 1} Q(\vec{x})\)?
+					\item For what input(s) \(\vec{x}\) is \(\max_{\|\vec{x}\| = 1} Q(\vec{x})\) attained?
+					\item Say the answer for the above question is a vector \(\vec{m}\). (That is, \(Q(\vec{m}) = \max_{\|\vec{x}\| = 1} Q(\vec{x})\)). What is the largest value \(Q\) could take on if we impose the 
+						constraints \[\|\vec{x}\| = 1 \qquad \text{\emph{and}} \qquad \vec{x} \cdot \vec{m} = 0?\]
+				\end{enumerate}
+			 
+			\item Find the SVD of the matrix \[A = \begin{bmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{bmatrix}.\]
+				\begin{enumerate}
+					\item Find an orthonormal basis for 
+						\begin{enumerate}
+							\item \(\colspace A\), 
+							\item \(\rowspace A\), 
+							\item \(\nullspace A\), and 
+							\item \(\nullspace A^T\).
+						\end{enumerate}
+					\item What is \(\rank A\)? How does this tie to the number of non-zero singular values?
+				\end{enumerate}
+			\item For the above matrix \(A\), what is \(\max_{\|\vec{x}\| = 1} \|A\vec{x}\|\)? At what input(s) does this maximum value occur?
+			\item For the above matrix \(A\), what is \(\min_{\|\vec{x}\| = 1} \|A\vec{x}\|\)? At what input(s) does this minimum value occur?
+		\end{enumerate} 
+	\end{newquestion}
+
+\include{solutions}
+\end{document}

@@ -13,7 +13,7 @@
 
 
 \title{\normalsize PLUS Session Worksheet \\[1em] \Large \textit{MATH 1554:} Linear Algebra}
-\author{Covering lessons: 5.3 \& 5.5}
+\author{Covering lessons: 7.3 \& 7.4}
 \date{Fall 2023}
 
 % ------- Set up header -------
@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhead[L]{Fall 2023}
 %\fancyhead[C]{\textit{\nouppercase{\rightmark}}}
-\fancyhead[C]{\textit{Diagonalization (5.3) \& Complex Eigenvalues (5.5)}}
+\fancyhead[C]{\textit{Constrained Opt. (7.3) \& SVD (7.4)}}
 \fancyhead[R]{\textbf{\thepage}}
 % -------------------------------------------------------
 
@@ -65,6 +65,7 @@
 \DeclareMathOperator{\row}{row}
 \DeclareMathOperator{\col}{col}
 \DeclareMathOperator{\colspace}{Col}
+\DeclareMathOperator{\rowspace}{Row}
 \DeclareMathOperator{\nullspace}{Nul}
 \DeclareMathOperator{\rank}{rank}
 % -------------------------------------------------------
@@ -77,13 +78,7 @@
 \begin{document}
 \maketitle
 
-\section{\centering Diagonalization (5.3)}
-	\begin{mideea}{0.9}
-		If the eigenvectors of a matrix \(A \in \mathbb{R}^{n \times n}\) form a basis for \(\mathbb{R}^n\), then it is possible to write \(A\) in the form of 
-		\[A = PDP^{-1},\] where the columns of \(P\) are the eigenvectors of \(A\) and the entries of the diagonal matrix \(D\) are the corresponding 
-		eigenvalues.
-	\end{mideea}
-
+\section{\centering T \& F}
 	\begin{newquestion}
 		For the following statements, answer \textit{true} if the statement is always true, and \textit{false} otherwise.
 		\begin{table}[!h]
@@ -91,46 +86,44 @@
 			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
 				true & false & \\
 				\specialrule{\lightrulewidth}{0.25em}{1.25em}
-				\bubble & \bubble & It is possible that there exists a square matrix \(A\) that is similar to a diagonalizable matrix \(B\), but \(A\) isn't diagonalizable. \\[0.75em]
-				\bubble & \bubble & If \(\vec{x}\) is an eigenvector of \(A\) with corresponding eigenvalue of \(\lambda\), and \(A = PBP^{-1}\) for some
-							      matrix \(P\), then \(P^{-1}\vec{x}\) is an eigenvector of \(B\) with corresponding eigenvalue \(\lambda\). \\[0.75em]
-				\bubble & \bubble & Row-equivalent matrices are similar. \\[0.75em]
-				\bubble & \bubble & Two similar matrices have the same eigenvalues.*\\[0.75em]
+				\bubble & \bubble & The quadratic form defined by \(Q(\vec{x}) = \vec{x}^TBB^T \vec{x}\) is always positive semidefinite. \\[0.75em]
+				\bubble & \bubble & If  \(A\) is a symmetric matrix, then the corresponding eigenvalues of \(A\) are equal to the corresponding singular values of \(A\). \\[0.75em]
+				\bubble & \bubble & Any matrix has a singular value decomposition.\\[0.75em]
+				\bubble & \bubble & If \(Q\) is a positive definite quadratic form with \(Q(\vec{x}) = \vec{x}^TA\vec{x}\) and \(A = A^T\), then the largest eigenvalue of \(A\) is the maximum value \(Q\) takes on in its domain.\\[0.5em]
+				\bubble & \bubble & Given \(A \in \mathbb{R}^{m \times n}\),  the largest singular value of \(A\) is the largest value \(Q(\vec{x}) = \|A\vec{x}\|\) takes on under the constraint \(\|\vec{x}\| = 1\).\\[0.5em]
+				\bubble & \bubble & For any nonzero matrix \(C \in \mathbb{R}^{m \times n}\), \(F(\vec{x}) = \|C\vec{x}\|^2\) defines a quadratic form.\\[0.5em]
 				\bottomrule
 			\end{tabular}
 		\end{table}
 	\end{newquestion}
 
+\section{\centering Short Answer Questions}
 	\begin{newquestion}
-		Refer to \textit{Sample Final Exam A}, Q. 12.
-	\end{newquestion}
-
-\section{\centering Complex Eigenvalues (5.5)}
-	\begin{mideea}{0.9}
-		It is possibe for a real matrix to have complex eigenvalues and eigenvectors. If that is the case, the eigen-stuff come in \emph{conjugate pairs}. That is, if \(\lambda\) is a
-		complex eigenvalue of \(A\) with a corresponding complex eigenvector \(\vec{v}\), then \(\overline{\lambda}\) is an eigenvalue of \(A\) and \(\overline{\vec{v}}\) is the 
-		corresponding eigenvector.\footnote{\(\overline{\lambda}\) denotes the complex conjugate of \(\lambda\).}
-	\end{mideea}
-
-	\begin{newquestion}
-		Answer the following statements with \textit{possible} if the statement \emph{could} be true, or \textit{impossible} otherwise.
-		\begin{table}[!h]
-			\centering
-			\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
-				possible & impossible & \\
-				\specialrule{\lightrulewidth}{0.25em}{1.25em}
-				\bubble & \bubble & A real \(5 \times 5\) matrix that has 3 complex eigenvalues and 2 real eigenvalues. \\[0.75em]
-				\bubble & \bubble & A real \(2 \times 2\) matrix that has \(1 + 5i\) and \(-1 + 5i\) as eigenvalues. \\[0.75em]
-				\bubble & \bubble & A real \(3 \times 3\) matrix that has a real eigenvalue and 2 complex eigenvalues. \\[0.75em]
-				\bubble & \bubble & A real \(n \times n\) matrix where \(n\) is odd and none of the eigenvalues of the matrix are real. \\[0.75em]
-				\bottomrule
-			\end{tabular}
-		\end{table}
-	\end{newquestion}
-
-	\begin{newquestion}
-		\(A = \begin{pmatrix}2 & -1 \\ 1 & 2\end{pmatrix}\) has an eigenvalue of \(\lambda_1 = 2 + i\). Find \(\lambda_2\) and the corresponding 
-		eigenvectors \(\vec{v}_1\) (corresponds to \(\lambda_1\)) and \(\vec{v}_2\) (corresponds to \(\lambda_2\)).
+		Try out the following questions.
+		\begin{enumerate}
+			\item Given the quadratic form \(Q(\vec{x}) = x_1^2 + 4x_2^2 + x_3^2 + 2x_1x_3\), there exists a change of variables \(\vec{x} = P\vec{y}\)
+				that yields a new quadratic form \(Q'\) such that \(Q'\) takes on the same values as \(Q\), with the additional property that no cross-terms
+				exist in \(Q'(\vec{y})\). Find \(Q'(\vec{y})\).
+				\begin{enumerate}
+					\item What is \(\max_{\|\vec{x}\|  = 1} Q(\vec{x})\)?
+					\item For what input(s) \(\vec{x}\) is \(\max_{\|\vec{x}\| = 1} Q(\vec{x})\) attained?
+					\item Say the answer for the above question is a vector \(\vec{m}\). (That is, \(Q(\vec{m}) = \max_{\|\vec{x}\| = 1} Q(\vec{x})\)). What is the largest value \(Q\) could take on if we impose the 
+						constraints \[\|\vec{x}\| = 1 \qquad \text{\emph{and}} \qquad \vec{x} \cdot \vec{m} = 0?\]
+				\end{enumerate}
+			 
+			\item Find the SVD of the matrix \[A = \begin{bmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{bmatrix}.\]
+				\begin{enumerate}
+					\item Find an orthonormal basis for 
+						\begin{enumerate}
+							\item \(\colspace A\), 
+							\item \(\rowspace A\), 
+							\item \(\nullspace A\), and 
+							\item \(\nullspace A^T\).
+						\end{enumerate}
+					\item What is \(\rank A\)? How does this tie to the number of non-zero singular values?
+				\end{enumerate}
+			\item For the above matrix \(A\), what is \(\max_{\|\vec{x}\| = 1} \|A\vec{x}\|\)? At what input(s) does this maximum occur?
+		\end{enumerate} 
 	\end{newquestion}
 
 \include{solutions}

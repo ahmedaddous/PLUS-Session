@@ -19,6 +19,7 @@
 			\dbubble & \bubble & If \(A \in \mathbb{R}^{2 \times 2}\) and has a complex eigenvalue \(\lambda_1\), then 
 						      \(\lvert \lambda_1 \rvert = \lvert \lambda_2 \rvert\), where \(\lambda_2\) is the second eigenvalue of \(A\).\\[2em]
 			\dbubble & \bubble & For any orthogonal matrix \(A\), \(\lvert \det(A) \rvert = 1\).\\[1em]
+			\dbubble & \bubble & If \(A\) is diagonalizable with the diagonalization \(A = PDP^{-1}\), then we have \(\det(A) = \det(D)\). \\[1.75em]
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -29,15 +30,16 @@
 		\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
 			possible & impossible & \\
 			\specialrule{\lightrulewidth}{0.25em}{1.25em}
-			\bubble & \dbubble & \(A^TA = AA^T = I\) and \(\lambda = 0\) is an eigenvalue of \(A\). \\[1em]
-			\bubble & \dbubble & An equation \(A\vec{x} = \vec{b}\) that doesn't have a least-squares solution. \\[1em]
+			\bubble & \dbubble & \(A^TA = AA^T = I\) and \(\lambda = 0\) is an eigenvalue of \(A\). \\[0.75em]
+			\bubble & \dbubble & An equation \(A\vec{x} = \vec{b}\) that doesn't have a least-squares solution. \\[0.75em]
 			\bubble & \dbubble & An onto linear transformation \(T \colon \mathbb{R}^3 \to \mathbb{R}^2\) whose standard matrix is \(A\) and 
-						      \(\dim(\nullspace(A^T)^\perp)\) = 1.\\[2em]
-			\bubble & \dbubble & A \(3 \times 3\) real matrix with only complex eigenvalues. \\[1em]
-			\dbubble & \bubble & A \(3 \times 2\) matrix whose column space is \(W\) and \(W^\perp\) is a line. \\[1em]
-			\bubble & \dbubble & An \(n \times p\) matrix \(U\) where \(p < n\) and \(UU^T\vec{x} = \vec{x}\) for all \(\vec{x} \in \mathbb{R}^n\). \\[1em]
+						      \(\dim(\nullspace(A^T)^\perp)\) = 1.\\[1.75em]
+			\bubble & \dbubble & A \(3 \times 3\) real matrix with only complex eigenvalues. \\[0.75em]
+			\dbubble & \bubble & A \(3 \times 2\) matrix whose column space is \(W\) and \(W^\perp\) is a line. \\[0.75em]
+			\bubble & \dbubble & \(U \in \mathbb{R}^{n \times p}\)  with orthonormal columns and \(p < n\) with \(UU^T\vec{x} = \vec{x}\) for all \(\vec{x} \in \mathbb{R}^n\). \\[0.75em]
 			\dbubble & \bubble & Two vectors \(\vec{v} \ne \vec{u}\) but \(\proj_W \vec{v} = \proj_W \vec{u}\), where \(W\) is a subspace of 
-						     \(\mathbb{R}^n\).\\[1em]
+						     \(\mathbb{R}^n\).\\[0.75em]
+			\bubble & \dbubble & Eigenvalue \(\lambda\) of \(A\) with algebraic multiplicity 1 and geometric multiplicity 2.\\[0.75em]
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -125,5 +127,5 @@
 					parametric vector equation yields a curve with the same amount of error.
 
 	\item[\textbf{Q10}] There are multiple answers. We present ours here.
-					\[A = \begin{bmatrix}1 & 2 & 1 \\ 0 & 1 & 1 \\ 3 & 0 & 1\end{bmatrix}\begin{bmatrix}8 & 0 & 0 \\ 0 & 8 & 0 \\ 0 & 0 & 12\end{bmatrix}\begin{bmatrix}1 & 2 & 1 \\ 0 & 1 & 1 \\ 3 & 0 & 1\end{bmatrix}^{-1}.\]
+					\[A = \begin{bmatrix}1 & 0 & 0 \\ -1 & 1 & 0 \\ 1 & 0 & 1\end{bmatrix}\begin{bmatrix}1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2\end{bmatrix}\begin{bmatrix}1 & 0 & 0 \\ -1 & 1 & 0 \\ 1 & 0 & 1\end{bmatrix}^{-1}.\]
 \end{enumerate}

@@ -1,0 +1,49 @@
+\section{\centering Solutions}
+
+\subsection{Solutions to T/F Questions}
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c@{\hspace{2.5em}}cp{0.75\textwidth}}
+		true & false & \\
+		\specialrule{\lightrulewidth}{0.25em}{1.25em}
+		\bubble & \dbubble & The quadratic form defined by \(Q(\vec{x}) = \vec{x}^TBB^T \vec{x}\) is always positive definite. \\[0.75em]
+		\bubble & \dbubble &If \(\sigma_1, \sigma_2, \dots , \sigma_n\) are the singular values of a \(n \times n\) matrix \(A\) , then 
+					    \(\det A = \sigma_1\sigma_2 \dots\sigma_n \). \\[0.75em]
+		\dbubble & \bubble & Any matrix has a singular value decomposition.\\[0.75em]
+		\bubble & \dbubble & If \(Q\) is a positive definite quadratic form with \(Q(\vec{x}) = \vec{x}^TA\vec{x}\) and \(A = A^T\), then the largest eigenvalue of \(A\) is the maximum value \(Q\) takes on in its domain.\\[0.5em]
+		\dbubble & \bubble & Given \(A \in \mathbb{R}^{m \times n}\),  the largest singular value of \(A\) is the largest value \(Q(\vec{x}) = \|A\vec{x}\|\) takes on under the constraint \(\|\vec{x}\| = 1\).\\[0.5em]
+		\dbubble & \bubble & For any nonzero matrix \(C \in \mathbb{R}^{m \times n}\), \(F(\vec{x}) = \|C\vec{x}\|^2\) defines a quadratic form.\\[0.5em]
+		\dbubble & \bubble & If \(A \in \mathbb{R}^{m \times n}\) and the transformation \(\vec{x} \mapsto A\vec{x}\) is one-to-one, then 
+					    it is impossibe for \(A\) to any singular values that equal to 0.\\[0.5em]
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Solutions to Short Answer Questions}
+
+\begin{enumerate}
+	\item Make the change of variables \(x = Py\) using the orthogonal diagonalization of the symmetrix matrix corresponding to \(Q(\vec{x})\), and you get
+		\(Q'(\vec{y}) = 2y_1^2 + 4y_2^2\).
+		\begin{enumerate}
+			\item 4.
+			\item \(\vec{x} = \pm\begin{bmatrix}0 \\ 1 \\ 0\end{bmatrix}\).
+			\item This is the second largest eigenvalue of the matrix we found above, which is 2.
+		\end{enumerate}
+	 
+	\item SVD: \[\begin{bmatrix}1 & -1 \\ 0 & 0 \\ 1 & -1\end{bmatrix} = \underbrace{\begin{bmatrix}1/\sqrt{2} & 0  & -1/\sqrt{2} \\ 0 & 1 & 0 \\ 1/\sqrt{2} & 0 & 1/\sqrt{2}\end{bmatrix}}_U \underbrace{\begin{bmatrix}2 & 0 \\ 0 & 0 \\ 0 & 0\end{bmatrix}}_\Sigma\underbrace{\begin{bmatrix}1/\sqrt{2} & -1/\sqrt{2} \\ 1/\sqrt{2} & 1/\sqrt{2}\end{bmatrix}}_{V^T}.\]
+		\begin{enumerate}
+			\item \(\left\{ \begin{bmatrix}1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}\end{bmatrix} \right\}\).\footnote{In general, if \(\rank A = r\), then the first \(r\)
+				 columns of \(U\) are form an orthonormal basis for the column space. The first \(r\) columns of \(V\) would also form an orthonormal
+				 basis for \(\rowspace A\).}
+			\item \(\left\{ \begin{bmatrix}1/\sqrt{2} \\ -1/\sqrt{2}\end{bmatrix} \right\}\).
+			\item \(\left\{ \begin{bmatrix}1/\sqrt{2} \\ 1/\sqrt{2}\end{bmatrix} \right\}\).
+			\item \(\left\{ \begin{bmatrix}0 \\ 1 \\ 0\end{bmatrix},  \begin{bmatrix}-1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}\end{bmatrix}\right\}\).
+			\item \(\rank A = 1\).
+		\end{enumerate}
+	\item \(\max_{\|\vec{x}\| = 1} \|A\vec{x}\| = \sigma_1 = 2\). This value is attained when 
+		 \(\vec{x} = \pm\begin{bmatrix}1/\sqrt{2} \\ -1/\sqrt{2}\end{bmatrix}\).
+	\item \(\min_{\|\vec{x}\| = 1} \|A\vec{x}\| = \sigma_2 = 0\). This value is attained when 
+		\(\vec{x} = \pm\begin{bmatrix}1/\sqrt{2} \\ 1/\sqrt{2}\end{bmatrix}\).
+
+\end{enumerate} 

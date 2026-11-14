@@ -1,6 +1,6 @@
 # PLUS Session Materials — MATH 1554: Linear Algebra
 
-Worksheets, slides, solutions, and session plans I wrote as a **PLUS** (Peer-Led Undergraduate Study) leader for **MATH 1554: Linear Algebra** at Georgia Tech, covering the **Summer 2023** and **Fall 2023** semesters.
+Worksheets, slides, solutions, and session plans I wrote as a **PLUS** (Peer-Led Undergraduate Study) leader for **MATH 1554: Linear Algebra** at Georgia Tech, covering the Summer 2023 and Fall 2023 semesters.
 
 PLUS sessions are optional, peer-led study sessions that run alongside the lectures. Each session goes back over recent material through group work, practice problems, and short concept reviews. The materials here were made for those sessions. They supplement the official course and **are not official course materials**.
 

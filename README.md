@@ -4,7 +4,7 @@ Worksheets, slides, solutions, and session plans I wrote as a **PLUS** (Peer-Led
 
 PLUS sessions are optional, peer-led study sessions that run alongside the lectures. Each session goes back over recent material through group work, practice problems, and short concept reviews. The materials here were made for those sessions. They supplement the official course and **are not official course materials**.
 
-- **Fall 2023 course site:** [MA 1554 Linear Algebra (Fall 2023)](https://sbarone7.math.gatech.edu/ma1554f23.html), which has the lecture notes, schedule, and practice exams.
+- **Fall 2023 course site:** [MA 1554 Linear Algebra (Fall 2023)](https://sbarone7.math.gatech.edu/ma1554f23.html), which has the lecture notes, schedule, and practice exams. (Instructor: Dr. Salvador Barone.)
 - **Summer 2023:** there is no public course site for this semester.
 
 Section numbers (for example *1.5* or *6.5*) refer to sections of the course textbook, as used in the MATH 1554 lecture schedule.
